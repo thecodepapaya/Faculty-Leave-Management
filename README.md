@@ -1,6 +1,6 @@
 # zoo_land
 
-A new Flutter project.
+A new Flutter project. This game is inspired from Alchemy, Game of Life, Farm Frenzy.
 
 ## Getting Started
 
