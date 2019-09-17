@@ -1,6 +1,6 @@
-# leave_management
+# Leave_management
 
-A new Flutter project.
+A new Flutter project for leave management of staff members of Indian Institute of Information Technology, Vadodara. 
 
 ## Getting Started
 
