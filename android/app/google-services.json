@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "151039857608",
+    "firebase_url": "https://leave-management-df71a.firebaseio.com",
+    "project_id": "leave-management-df71a",
+    "storage_bucket": "leave-management-df71a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151039857608:android:57c42a58a1151a9df2a6fd",
+        "android_client_info": {
+          "package_name": "com.example.leave_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151039857608-aqukqsekabv256l037ll7p7t08avn70s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRvW1N3cBpyutdcvBXeRkrp_LW-isyLi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151039857608-aqukqsekabv256l037ll7p7t08avn70s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
