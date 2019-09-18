@@ -1,16 +1,17 @@
-# leave_management
+# Leave Management
 
-A new Flutter project.
+## Overview
+A Flutter Project for Staff Leave Management. This project aims to change the process of granting and applying for leave. It provides the user an easy way to apply for leaves while also maintains a record of their past leaves. The user can simply fill a form while the software designs and formats it into a formal official document. The admin can easily grant or deny the request thus reducing the latency in the process and eventually making the system more efficient.     
+## Technology Stack
++ Flutter
++ Firebase
 
-## Getting Started
+## Team
++ [Pritha Upadhyay](https://github.com/prithaupadhyay) (Mentor)
++ [Mayank Ajmeri](https://github.com/MayankAjmeri)
++ [Anuj Puri](https://github.com/anujpuri72)
++ [Anvay Mishra](https://github.com/anvaymishra1)
++ [Ashutosh Singh](https://github.com/ashutoshsingh05)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Structure 
+![Structure](https://raw.githubusercontent.com/anvaymishra1/Leave-Management/master/assets/structure.png?token=ALQW7OULZZBWGH6HO2JSP6K5RL424)
