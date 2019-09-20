@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "151039857608-qoectlhlmclp3euud4dg9o0ih4cvjr6o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.leave_management",
+            "certificate_hash": "32740f15c6c487101a0b2d15dcefc20ad2f173d8"
+          }
+        },
+        {
           "client_id": "151039857608-aqukqsekabv256l037ll7p7t08avn70s.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -2,27 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
-class SignIn extends StatefulWidget {
-  SignIn({Key key}) : super(key: key);
+class SignInScreen extends StatefulWidget {
+  SignInScreen({Key key}) : super(key: key);
 
   _SignInState createState() => _SignInState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignInState extends State<SignInScreen> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-       child: RaisedButton(
-         onPressed: handleGoogleSignIn,
-         child: Text("SignIn"),
-       ),
+    return Scaffold(
+      body: Center(
+        child: RaisedButton(
+          child: Text("Sign In"),
+          onPressed: handleGoogleSignIn,
+        ),
+      ),
     );
   }
-  
+
   Future<FirebaseUser> handleGoogleSignIn() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
@@ -35,5 +36,4 @@ class _SignInState extends State<SignIn> {
     FirebaseUser user = authResult.user;
     return user;
   }
-  
 }
