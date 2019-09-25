@@ -14,4 +14,4 @@ A Flutter Project for Staff Leave Management. This project aims to change the pr
 + [Ashutosh Singh](https://github.com/ashutoshsingh05)
 
 ## Structure 
-![Structure](https://raw.githubusercontent.com/anvaymishra1/Leave-Management/master/assets/structure.png?token=ALQW7OULZZBWGH6HO2JSP6K5RL424)
+![Structure](https://raw.githubusercontent.com/ashutoshsingh05/Leave-Management/master/assets/structure.png?token=AKFWP3LXMGWPY4WFM2XBB225STRQK)
