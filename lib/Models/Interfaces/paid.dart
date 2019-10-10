@@ -1,6 +1,6 @@
 import 'leave.dart';
 
-abstract class paid {
+abstract class Paid {
   bool faculty;
   bool isAppendable;
   int remainingLeaves;
