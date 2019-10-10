@@ -2,6 +2,8 @@ import 'leave.dart';
 
 abstract class paid {
   bool faculty;
-  int remaining_leaves;
+  bool isAppendable;
+  int remainingLeaves;
   int duration;
+  int maxConsecutive;
 }
