@@ -1,4 +1,4 @@
-import 'package:leave_management/Models/Interfaces/Leave.dart';
+import 'package:leave_management/Models/Interfaces/leave.dart';
 
 abstract class Paid extends Leave {
   int totalannualcount;

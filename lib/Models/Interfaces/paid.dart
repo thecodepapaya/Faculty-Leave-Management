@@ -1,4 +1,4 @@
-import 'Leave.dart';
+import 'leave.dart';
 
 abstract class paid {
   bool faculty;
