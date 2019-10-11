@@ -12,7 +12,4 @@ class Overflowable extends Accumulatable {
   void calendarExpire() {
     remainingLeaves = remainingLeaves % maxAccumulatable;
   }
-
-  @override
-  int maxAccumulatable;
 }
