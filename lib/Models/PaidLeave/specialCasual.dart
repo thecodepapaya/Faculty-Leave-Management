@@ -1,4 +1,4 @@
-import 'package:leave_management/Models/PaidLeave/casualLeave.dart';
+import 'casualLeave.dart';
 
 class SpecialCasual extends CasualLeave {
   @override
