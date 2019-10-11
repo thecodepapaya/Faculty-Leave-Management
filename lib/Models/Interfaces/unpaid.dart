@@ -1,6 +1,6 @@
 import 'leave.dart';
 
-abstract class Unpaid {
+abstract class Unpaid extends Leave {
   bool faculty;
   bool isAppendable;
   int duration;
