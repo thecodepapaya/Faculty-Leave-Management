@@ -9,4 +9,19 @@ class Extraordinary extends Unpaid {
   var duration = 12; //RANDOM NUMBER
   final isAppendable = false;
   bool allLeaExhausted = true;
+  String dPermission;
+  bool checkp() {
+    if (dPermission == "given")
+      return true;
+    else
+      return false;
+  }
+
+  @override
+  bool applyLeave(int duration) {
+    if ((duration > maxContiguousPossibleDuration) || (checkp() == false))
+      return false;
+    else
+      return true;
+  }
 }
