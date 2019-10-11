@@ -3,9 +3,15 @@ import 'package:leave_management/Models/Interfaces/unpaid.dart';
 class Special extends Unpaid {
   final faculty = true;
   // int remaining_leaves;
-  var pastService = 365 * 3;
+  var pastService;
   final maxConsecutive = 365 * 3;
   String salary = "given";
-  var duration = 365;
+  var duration;
   final isAppendable = false;
+  bool applyLeave(int duration) {
+    if ((duration > maxContiguousPossibleDuration) || pastService < 3)
+      return false;
+    else
+      return true;
+  }
 }

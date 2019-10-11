@@ -20,7 +20,7 @@ class Lien extends Unpaid {
   }
 
   @override
-  int sanctionedLeaves() {
+  int sanctionedLeaves(int duration) {
     if (applyLeave(duration) == true) // TODO: implement sanctionedLeaves
       return duration;
   }
