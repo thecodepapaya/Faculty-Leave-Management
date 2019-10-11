@@ -2,7 +2,7 @@ abstract class Leave {
   int remainingLeaves;
   int duration;
   int maxContiguousPossibleDuration;
-  
+
   int sanctionedLeaves(int duration) {
     if (applyLeave(duration))
       return duration;
