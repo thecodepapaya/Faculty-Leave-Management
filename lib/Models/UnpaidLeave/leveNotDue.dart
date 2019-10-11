@@ -1,4 +1,4 @@
-import 'package:leave_management/Models/Interfaces/unpaid.dart';
+import 'package:leave_management/Models/Interfaces/Unpaid.dart';
 
 class Leavenotdue extends Unpaid {
   final faculty = true;

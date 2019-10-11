@@ -1,8 +1,3 @@
-class AcademicCalendar {
-  String startdate;
-  String enddate;
+import 'package:leave_management/Models/Interfaces/calendar.dart';
 
-  void calendarExpire() {}
-
-  void calendarBegin() {}
-}
+class AcademicCalendar extends Calendar {}
