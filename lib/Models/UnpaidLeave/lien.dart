@@ -1,11 +1,11 @@
-import 'package:leave_management/Models/Interfaces/Unpaid.dart';
+import 'package:leave_management/Models/Interfaces/unpaid.dart';
 
-class lien extends Unpaid {
+class Lien extends Unpaid {
   final faculty = true;
   // bool benefitsgiven = false;
-  var past_service = 365 * 5;
+  var pastService = 365 * 5;
   String salary = "notgiven";
   final maxConsecutive = 365; //past_service/5 //RANDOM NUMBER
   final isAppendable = false;
-  bool agreemnent_signed = true;
+  bool agreementSigned = true;
 }

@@ -5,5 +5,5 @@ abstract class Unpaid {
   bool isAppendable;
   int duration;
   int maxConsecutive;
-  int past_service;
+  int pastService;
 }
