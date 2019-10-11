@@ -3,4 +3,5 @@ abstract class Leave {
   int duration;
   int sanctionedLeaves();
   bool applyLeave(int duration);
+  
 }
