@@ -4,7 +4,7 @@ class ChildCare extends Paid {
   final duration = 365 * 2;
   final isAppendable = false;
   final maxConsecutive = 15;
-  var remainingLeaves = 15;
-  var leaveApplicable = false;
+  int remainingLeaves = 15;
+  bool leaveApplicable = false;
   void reason() {}
 }
