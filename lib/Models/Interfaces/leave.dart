@@ -1,4 +1,6 @@
-abstract class Leave{
-  int remaining_leaves;
+abstract class Leave {
+  int remainingLeaves;
   int duration;
-} 
+  int sanctionedLeaves();
+  bool applyLeave(int duration);
+}
