@@ -92,7 +92,7 @@ class _lformState extends State<lform> {
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.adjust),
                   hintText: 'Enter a Purpose',
-                  labelText: 'Putpose',
+                  labelText: 'Purpose',
                 ),
               ),
               new TextFormField(
