@@ -34,6 +34,9 @@ class _lformState extends State<lform> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Leave Form"),
+      ),
       // isClickable: false,
       // title: "Trader Form",
       floatingActionButton: new FloatingActionButton.extended(
