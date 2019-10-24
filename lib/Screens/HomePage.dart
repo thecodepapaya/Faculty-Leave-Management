@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:leave_management/Screens/leaveForm.dart';
+import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:leave_management/Screens/pendingApproval.dart';
 import 'package:leave_management/Screens/pastLeaves.dart';
@@ -15,10 +16,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Home page"),
-      ),
+    return LeaveScaffold(
+      title: "Home page",
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -90,7 +89,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leave_management/Utils/LeaveScaffold.dart';
 
 class PastLeaves extends StatefulWidget {
   @override
@@ -16,10 +17,8 @@ class _PastLeavesState extends State<PastLeaves> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("PastLeaves"),
-      ),
+    return LeaveScaffold(
+      title: "Past Leavse",
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

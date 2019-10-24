@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leave_management/Utils/LeaveScaffold.dart';
 
 class PendingApproval extends StatefulWidget {
   @override
@@ -8,10 +9,8 @@ class PendingApproval extends StatefulWidget {
 class _PendingApprovalState extends State<PendingApproval> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Pending Approvals"),
-      ),
+    return LeaveScaffold(
+      title: "Pending Approvals",
       body: ListView(
         children: <Widget>[
           ListTile(
