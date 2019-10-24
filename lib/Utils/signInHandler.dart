@@ -22,7 +22,9 @@ class _SignInHandlerState extends State<SignInHandler> {
           );
         } else {
           if (snapshot.hasData) {
-            return HomePage();
+            return HomePage(
+              user: snapshot.data,
+            );
           } else {
             return SignInScreen();
           }

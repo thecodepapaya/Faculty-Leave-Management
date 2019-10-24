@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:leave_management/Screens/pendingApproval.dart';
+import 'package:leave_management/Screens/pastLeaves.dart';
 
 class HomePage extends StatefulWidget {
   final FirebaseUser user;
@@ -63,7 +64,13 @@ class _HomePageState extends State<HomePage> {
               child: ListTile(
                 title: Text("Past Leaves"),
                 subtitle: Text("Check past leaves record"),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (BuildContext context) {
+                      return PastLeaves();
+                    }),
+                  );
+                },
               ),
             ),
             Card(
