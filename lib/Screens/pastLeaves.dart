@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leave_management/Screens/leaveDetails.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 
 class PastLeaves extends StatefulWidget {
@@ -29,6 +30,15 @@ class _PastLeavesState extends State<PastLeaves> {
                   title: listtitle("Leave due to fever"),
                   subtitle: listdetail(
                       "Medical Leave", "October 10 ,2019", "October 25 ,2019"),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LeaveDetails();
+                        },
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -39,6 +49,15 @@ class _PastLeavesState extends State<PastLeaves> {
                   title: listtitle("Leave for perosnal reason"),
                   subtitle: listdetail("Casual Leave", "September 14 ,2019",
                       "September 17 ,2019"),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LeaveDetails();
+                        },
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -49,6 +68,15 @@ class _PastLeavesState extends State<PastLeaves> {
                   title: listtitle("Vacation"),
                   subtitle:
                       listdetail("Vacation", "May 12 ,2019", "June 25 ,2019"),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LeaveDetails();
+                        },
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -59,6 +87,15 @@ class _PastLeavesState extends State<PastLeaves> {
                   title: listtitle("Leave due to cough and cold"),
                   subtitle: listdetail(
                       "Sick Leave", "April 15 ,2019", "April 16 ,2019"),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LeaveDetails();
+                        },
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -69,6 +106,15 @@ class _PastLeavesState extends State<PastLeaves> {
                   title: listtitle("Child-care Leave"),
                   subtitle: listdetail(
                       "Child Care Leave", "March 4 ,2019", "March 24 ,2019"),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LeaveDetails();
+                        },
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -79,6 +125,15 @@ class _PastLeavesState extends State<PastLeaves> {
                   title: listtitle("Paternity"),
                   subtitle: listdetail("Paternity Leave", "February 20 ,2019",
                       "February 28 ,2019"),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LeaveDetails();
+                        },
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -89,6 +144,15 @@ class _PastLeavesState extends State<PastLeaves> {
                   title: listtitle("Leave due to Viral Fever"),
                   subtitle: listdetail(
                       "Medical Leave", "January 10 ,2019", "January 15 ,2019"),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LeaveDetails();
+                        },
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -99,6 +163,15 @@ class _PastLeavesState extends State<PastLeaves> {
                   title: listtitle("Leave due to personal reason"),
                   subtitle: listdetail("Casual Leave", "December 20 ,2018",
                       "December 25 , 2018"),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LeaveDetails();
+                        },
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
