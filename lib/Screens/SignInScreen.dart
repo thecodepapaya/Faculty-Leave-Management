@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:leave_management/Utils/LeaveScaffold.dart';
 
 class SignInScreen extends StatefulWidget {
   SignInScreen({Key key}) : super(key: key);
@@ -14,7 +15,8 @@ class _SignInState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return LeaveScaffold(
+      title: "Sign In",
       body: Center(
         child: RaisedButton(
           child: Text("Sign In"),

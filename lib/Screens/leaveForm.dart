@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leave_management/Utils/LeaveScaffold.dart';
 
 class LeaveForm extends StatefulWidget {
   @override
@@ -15,12 +16,9 @@ class _LeaveFormState extends State<LeaveForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: new AppBar(
-        title: Text("Leave Form"),
-        centerTitle: true,
-      ),
-      floatingActionButton: new FloatingActionButton.extended(
+    return LeaveScaffold(
+      title: "Leave Form",
+      floatingButton: FloatingActionButton.extended(
           onPressed: () {
             showDialog(
               context: context,
