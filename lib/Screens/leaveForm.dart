@@ -16,6 +16,10 @@ class _LeaveFormState extends State<LeaveForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: new AppBar(
+        title: Text("Leave Form"),
+        centerTitle: true,
+      ),
       floatingActionButton: new FloatingActionButton.extended(
           onPressed: () {
             showDialog(
@@ -69,7 +73,7 @@ class _LeaveFormState extends State<LeaveForm> {
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.adjust),
                   hintText: 'Enter a Purpose',
-                  labelText: 'Putpose',
+                  labelText: 'Purpose',
                 ),
               ),
               new TextFormField(
