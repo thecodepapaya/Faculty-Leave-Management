@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:leave_management/Screens/lform.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:leave_management/Screens/pendingApproval.dart';
 import 'package:leave_management/Screens/pastLeaves.dart';
@@ -22,6 +23,13 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            // UserAccountsDrawerHeader(
+            //   accountEmail: Text(widget.user.email),
+            //   accountName: Text(widget.user.displayName),
+            //   currentAccountPicture: CircleAvatar(
+            //     backgroundImage: NetworkImage(widget.user.photoUrl),
+            //   ),
+            // ),
             Row(
               children: <Widget>[
                 Padding(
@@ -82,18 +90,18 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      // onPressed: () {
-      //   Navigator.of(context).push(
-      //     MaterialPageRoute(
-      //       builder: (BuildContext context) {
-      //         return LeaveForm();
-      //       },
-      //     ),
-      //   );
-      // },
-      // child: Icon(Icons.add),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return LeaveForm();
+              },
+            ),
+          );
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
