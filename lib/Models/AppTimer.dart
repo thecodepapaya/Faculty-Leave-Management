@@ -19,7 +19,7 @@ class AppTimer {
 
   void tickMonth() {
     monthsPassed++;
-    if (monthsPassed % 30 == 0 && monthsPassed != 0) {
+    if (monthsPassed % 12 == 0 && monthsPassed != 0) {
       monthsPassed = 0;
       tickYear();
     }
