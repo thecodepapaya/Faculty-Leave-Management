@@ -14,17 +14,17 @@ abstract class HouseKeeping {
     return 0;
   }
 
-  static Future<int> dailyRefresh() async {
-    return 0;
-  }
+  // static Future<int> dailyRefresh() async {
+  //   return 0;
+  // }
 
-  static Future<int> monthylRefresh() async {
-    return 0;
-  }
+  // static Future<int> monthylRefresh() async {
+  //   return 0;
+  // }
 
-  static Future<int> yearlyRefresh() async {
-    return 0;
-  }
+  // static Future<int> yearlyRefresh() async {
+  //   return 0;
+  // }
 
   static Future<int> updateLastSeen({@required String emailId}) async {
     print("Updating last seen for $emailId");
