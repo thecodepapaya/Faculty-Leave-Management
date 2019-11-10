@@ -7,19 +7,15 @@ class CasualLeave extends Paid implements AcademicCalendar {
   int remainingLeaves = 8;
   final isAppendable = false;
 
-  @override
-  String enddate;
+  String endDate;
 
-  @override
-  String startdate;
+  String startDate;
 
   @override
   void calendarBegin() {
-    // TODO: implement calendarBegin
   }
 
   @override
   void calendarExpire() {
-    // TODO: implement calendarExpire
   }
 }

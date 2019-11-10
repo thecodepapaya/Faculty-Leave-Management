@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:leave_management/Screens/leaveForm.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:leave_management/Utils/houseKeeping.dart';
 import 'package:leave_management/Screens/pendingApproval.dart';
 import 'package:leave_management/Screens/pastLeaves.dart';
 
@@ -15,6 +15,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    HouseKeeping.updateLastSeen(emailId: widget.user.email);
+  }
+
   @override
   Widget build(BuildContext context) {
     return !widget.user.email.endsWith("@iiitvadodara.ac.in")
