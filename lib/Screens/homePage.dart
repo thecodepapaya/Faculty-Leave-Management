@@ -14,11 +14,23 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation animation;
+
   @override
   void initState() {
     super.initState();
     HouseKeeping.updateLastSeen(emailId: widget.user.email);
+
+    controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    animation = Tween(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(controller);
+    controller.forward();
   }
 
   @override
@@ -66,19 +78,25 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 10,
                   ),
-                  Card(
-                    child: ListTile(
-                      title: Text("Pending Approval"),
-                      subtitle: Text("Check leaves which are pending approval"),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                            return PendingApproval();
-                          }),
-                        );
-                      },
+                  FadeTransition(
+                    // controller.forward(),
+                    child: Card(
+                      child: ListTile(
+                        title: Text("Pending Approval"),
+                        subtitle:
+                            Text("Check leaves which are pending approval"),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                              return PendingApproval();
+                            }),
+                          );
+                        },
+                      ),
                     ),
+                    opacity: animation,
                   ),
+
                   Card(
                     child: ListTile(
                       title: Text("Past Leaves"),
