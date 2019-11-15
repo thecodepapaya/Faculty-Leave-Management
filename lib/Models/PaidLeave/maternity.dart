@@ -1,6 +1,6 @@
-import 'package:leave_management/Models/Interfaces/paid.dart';
+import 'medical.dart';
 
-class Maternity extends Paid {
+class Maternity extends Medical {
   final duration = 365 * 2;
   final isAppendable = true;
   final maxConsecutive = 180;
