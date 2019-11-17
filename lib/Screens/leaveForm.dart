@@ -1,4 +1,5 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:intl/intl.dart';
@@ -15,20 +16,20 @@ class _LeaveFormState extends State<LeaveForm> {
   String _leaveType = ' ';
   List<String> _leavesList = <String>[
     ' ',
-    'Casual Leave',
-    'Child Care',
-    'Maternity',
-    'Medical',
-    'Paternity',
-    'Half paid',
-    'Full paid',
-    'Special Casual',
-    'Vacation',
-    'Extra Ordinary',
-    'Leave Not Due',
-    'Lien',
-    'Sabbatical',
-    'Special',
+    GlobalVariables.casualLeave,
+    GlobalVariables.childCare,
+    GlobalVariables.maternity,
+    GlobalVariables.medical,
+    GlobalVariables.paternity,
+    GlobalVariables.halfPaid,
+    GlobalVariables.fullPaid,
+    GlobalVariables.specialCasual,
+    GlobalVariables.vacation,
+    GlobalVariables.extraOrdinary,
+    GlobalVariables.leaveNotDue,
+    GlobalVariables.lien,
+    GlobalVariables.sabbatical,
+    GlobalVariables.special,
   ];
 
   TextEditingController _reasonController = TextEditingController();
@@ -67,16 +68,18 @@ class _LeaveFormState extends State<LeaveForm> {
                     onPressed: () async {
                       await Firestore.instance
                           .collection("admin")
-                          .document("${GlobalVariables.user.email}" +
+                          .document("${GlobalVariables.user.email} " +
                               DateTime.now().millisecondsSinceEpoch.toString())
                           .setData({
                         "reason": _reasonController.text,
                         "subject": _subjectController.text,
-                        "startdate": _startDateController.text,
-                        "enddate": _endDateController.text,
+                        "startDate": _startDateController.text,
+                        "endDate": _endDateController.text,
                         "name": GlobalVariables.user.displayName,
-                        "checked": false,
-                        "granted": false,
+                        "isChecked": false,
+                        "isGranted": false,
+                        "epochTime":
+                            DateTime.now().millisecondsSinceEpoch.toString(),
                       }).then((onValue) {
                         Navigator.pop(context);
                         Navigator.pop(context);
