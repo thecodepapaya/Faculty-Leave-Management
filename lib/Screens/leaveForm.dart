@@ -7,7 +7,7 @@ class LeaveForm extends StatefulWidget {
 }
 
 class _LeaveFormState extends State<LeaveForm> {
-  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController _nameController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
@@ -18,13 +18,14 @@ class _LeaveFormState extends State<LeaveForm> {
   Widget build(BuildContext context) {
     return LeaveScaffold(
       title: "Leave Form",
-      floatingButton: FloatingActionButton.extended(
-          onPressed: () {
-            showDialog(
-              context: context,
-              child: new AlertDialog(
-                title: new Text("Submit"),
-                content: new Text(
+      floatingButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Submit"),
+                content: Text(
                     "Please check your details. After proceeding you will not be able to edit your details."),
                 actions: <Widget>[
                   FlatButton(
@@ -46,19 +47,21 @@ class _LeaveFormState extends State<LeaveForm> {
                     ),
                   ),
                 ],
-              ),
-            );
-          },
-          tooltip: "submit",
-          label: Text("Submit")),
-      body: new Container(
-        child: new Form(
+              );
+            },
+          );
+        },
+        tooltip: "submit",
+        child: Text("Submit"),
+      ),
+      body: Container(
+        child: Form(
           key: _formKey,
           autovalidate: true,
-          child: new ListView(
+          child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             children: <Widget>[
-              new TextFormField(
+              TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.person),
@@ -66,7 +69,7 @@ class _LeaveFormState extends State<LeaveForm> {
                   labelText: 'Name',
                 ),
               ),
-              new TextFormField(
+              TextFormField(
                 controller: _phoneController,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.adjust),
@@ -74,7 +77,7 @@ class _LeaveFormState extends State<LeaveForm> {
                   labelText: 'Purpose',
                 ),
               ),
-              new TextFormField(
+              TextFormField(
                 controller: _sdatecontroller,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.date_range),
@@ -83,7 +86,7 @@ class _LeaveFormState extends State<LeaveForm> {
                 ),
                 keyboardType: TextInputType.datetime,
               ),
-              new TextFormField(
+              TextFormField(
                 controller: _edatecontroller,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.date_range),
