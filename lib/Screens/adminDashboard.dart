@@ -178,18 +178,6 @@ class _AdminDashboardState extends State<AdminDashboard>
                 ),
               ],
             ),
-            floatingButton: FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return LeaveForm();
-                    },
-                  ),
-                );
-              },
-              child: Icon(Icons.add),
-            ),
           );
   }
 
