@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:leave_management/Utils/GlobalVariables.dart';
 
 class RemainingLeaves extends StatefulWidget {
   @override
@@ -23,7 +24,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
     );
   }
 
-  Widget detailsCard(String title, Color dikh) {
+  Widget detailsCard(String title, Color dikh, int tot, int rem) {
+    // print("============================");
+    // print(tot);
+    // print(rem);
     return Container(
       width: 450,
       height: 100.0,
@@ -44,10 +48,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
             children: <Widget>[
               Text(title, style: TextStyle(color: Colors.white, fontSize: 22)),
               Row(
-                children: <Widget>[Text('Total : '), Text('100')],
+                children: <Widget>[Text('Total : '), Text('$tot')],
               ),
               Row(
-                children: <Widget>[Text('Remaining : '), Text('100')],
+                children: <Widget>[Text('Remaining : '), Text('$rem')],
               )
             ],
           ),
@@ -60,9 +64,11 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
   Widget build(BuildContext context) {
     return LeaveScaffold(
       title: "Remaining Leaves",
-      body: FutureBuilder(
-        future: Firestore.instance.collection("farmers").document("an").get(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      body: FutureBuilder<QuerySnapshot>(
+        future: Firestore.instance
+            .collection("${GlobalVariables.user.email}")
+            .getDocuments(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
               snapshot.connectionState == ConnectionState.none) {
             return Center(
@@ -76,6 +82,8 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Text("Error occured"),
               );
             } else {
+              // print("sdsdsdssdddddddddddddddddddddddddddddd");
+              // print(snapshot.data.documents[5].data["total"]);
               return SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
@@ -88,8 +96,11 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                           children: <Widget>[
                             Positioned(
                               left: 40.0,
-                              child:
-                                  detailsCard("MedicalLeave", Colors.red[300]),
+                              child: detailsCard(
+                                  "MedicalLeave",
+                                  Colors.red[300],
+                                  snapshot.data.documents[5].data["total"],
+                                  snapshot.data.documents[5].data["remaining"]),
                             ),
                             Positioned(top: 16.5, child: image1),
                           ],
@@ -105,25 +116,11 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                           children: <Widget>[
                             Positioned(
                               left: 40.0,
-                              child:
-                                  detailsCard("Casual Leave", Colors.blue[300]),
-                            ),
-                            Positioned(top: 16.5, child: image1),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
-                      child: Container(
-                        height: 115,
-                        child: Stack(
-                          children: <Widget>[
-                            Positioned(
-                              left: 40.0,
-                              child:
-                                  detailsCard("Paid Leave", Colors.green[300]),
+                              child: detailsCard(
+                                  "Casual Leave",
+                                  Colors.blue[300],
+                                  snapshot.data.documents[0].data["total"],
+                                  snapshot.data.documents[0].data["remaining"]),
                             ),
                             Positioned(top: 16.5, child: image1),
                           ],
@@ -140,7 +137,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                             Positioned(
                               left: 40.0,
                               child: detailsCard(
-                                  "Child Care", Colors.deepPurple[200]),
+                                  "Paid Leave",
+                                  Colors.green[300],
+                                  snapshot.data.documents[6].data["total"],
+                                  snapshot.data.documents[6].data["remaining"]),
                             ),
                             Positioned(top: 16.5, child: image1),
                           ],
@@ -157,7 +157,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                             Positioned(
                               left: 40.0,
                               child: detailsCard(
-                                  "Paternity Leave", Colors.lightGreen[200]),
+                                  "Child Care",
+                                  Colors.deepPurple[200],
+                                  snapshot.data.documents[1].data["total"],
+                                  snapshot.data.documents[1].data["remaining"]),
                             ),
                             Positioned(top: 16.5, child: image1),
                           ],
@@ -174,7 +177,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                             Positioned(
                               left: 40.0,
                               child: detailsCard(
-                                  "Special Casual Leave", Colors.orange[200]),
+                                  "Paternity Leave",
+                                  Colors.lightGreen[200],
+                                  snapshot.data.documents[7].data["total"],
+                                  snapshot.data.documents[7].data["remaining"]),
                             ),
                             Positioned(top: 16.5, child: image1),
                           ],
@@ -191,7 +197,11 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                             Positioned(
                               left: 40.0,
                               child: detailsCard(
-                                  "Vacation Leave", Colors.red[300]),
+                                  "Special Casual Leave",
+                                  Colors.orange[200],
+                                  snapshot.data.documents[10].data["total"],
+                                  snapshot
+                                      .data.documents[10].data["remaining"]),
                             ),
                             Positioned(top: 16.5, child: image1),
                           ],
@@ -208,7 +218,11 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                             Positioned(
                               left: 40.0,
                               child: detailsCard(
-                                  "Extra ordinary", Colors.blue[300]),
+                                  "Vacation Leave",
+                                  Colors.red[300],
+                                  snapshot.data.documents[11].data["total"],
+                                  snapshot
+                                      .data.documents[11].data["remaining"]),
                             ),
                             Positioned(top: 16.5, child: image1),
                           ],
@@ -225,41 +239,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                             Positioned(
                               left: 40.0,
                               child: detailsCard(
-                                  "Leave not due", Colors.green[300]),
-                            ),
-                            Positioned(top: 16.5, child: image1),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
-                      child: Container(
-                        height: 115,
-                        child: Stack(
-                          children: <Widget>[
-                            Positioned(
-                              left: 40.0,
-                              child:
-                                  detailsCard("Lien", Colors.deepPurple[200]),
-                            ),
-                            Positioned(top: 16.5, child: image1),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
-                      child: Container(
-                        height: 115,
-                        child: Stack(
-                          children: <Widget>[
-                            Positioned(
-                              left: 40.0,
-                              child: detailsCard(
-                                  "Sabattial Leave", Colors.lightGreen[200]),
+                                  "Extra ordinary",
+                                  Colors.blue[300],
+                                  snapshot.data.documents[2].data["total"],
+                                  snapshot.data.documents[2].data["remaining"]),
                             ),
                             Positioned(top: 16.5, child: image1),
                           ],
@@ -276,7 +259,71 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                             Positioned(
                               left: 40.0,
                               child: detailsCard(
-                                  "Special Leave", Colors.orange[200]),
+                                  "Leave not due",
+                                  Colors.green[300],
+                                  snapshot.data.documents[3].data["total"],
+                                  snapshot.data.documents[3].data["remaining"]),
+                            ),
+                            Positioned(top: 16.5, child: image1),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 19.0, vertical: 8.0),
+                      child: Container(
+                        height: 115,
+                        child: Stack(
+                          children: <Widget>[
+                            Positioned(
+                              left: 40.0,
+                              child: detailsCard(
+                                  "Lien",
+                                  Colors.deepPurple[200],
+                                  snapshot.data.documents[4].data["total"],
+                                  snapshot.data.documents[4].data["remaining"]),
+                            ),
+                            Positioned(top: 16.5, child: image1),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 19.0, vertical: 8.0),
+                      child: Container(
+                        height: 115,
+                        child: Stack(
+                          children: <Widget>[
+                            Positioned(
+                              left: 40.0,
+                              child: detailsCard(
+                                  "Sabbatical Leave",
+                                  Colors.lightGreen[200],
+                                  snapshot.data.documents[9].data["total"],
+                                  snapshot.data.documents[9].data["remaining"]),
+                            ),
+                            Positioned(top: 16.5, child: image1),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 19.0, vertical: 8.0),
+                      child: Container(
+                        height: 115,
+                        child: Stack(
+                          children: <Widget>[
+                            Positioned(
+                              left: 40.0,
+                              child: detailsCard(
+                                  "Special Leave",
+                                  Colors.orange[200],
+                                  snapshot.data.documents[10].data["total"],
+                                  snapshot
+                                      .data.documents[10].data["remaining"]),
                             ),
                             Positioned(top: 16.5, child: image1),
                           ],
