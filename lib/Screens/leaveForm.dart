@@ -10,8 +10,8 @@ class LeaveForm extends StatefulWidget {
 
 class _LeaveFormState extends State<LeaveForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String _leave = ' ';
-  List<String> _leaves = <String>[
+  String _leaveType = ' ';
+  List<String> _leavesList = <String>[
     ' ',
     'Casual Leave',
     'Child Care',
@@ -29,8 +29,8 @@ class _LeaveFormState extends State<LeaveForm> {
     'Special',
   ];
 
-  TextEditingController _addresseeNameController = TextEditingController();
-  TextEditingController _purposeController = TextEditingController();
+  TextEditingController _reasonController = TextEditingController();
+  TextEditingController _subjectController = TextEditingController();
   TextEditingController _startDateController = TextEditingController();
   TextEditingController _endDateController = TextEditingController();
 
@@ -90,19 +90,19 @@ class _LeaveFormState extends State<LeaveForm> {
                       icon: const Icon(Icons.home),
                       labelText: 'Leaves',
                     ),
-                    isEmpty: _leave == ' ',
+                    isEmpty: _leaveType == ' ',
                     child: new DropdownButtonHideUnderline(
                       child: new DropdownButton(
                         hint: Text("Select Leaves"),
-                        value: _leave,
+                        value: _leaveType,
                         isDense: true,
                         onChanged: (String newValue) {
                           setState(() {
-                            _leave = newValue;
+                            _leaveType = newValue;
                             state.didChange(newValue);
                           });
                         },
-                        items: _leaves.map((String value) {
+                        items: _leavesList.map((String value) {
                           return new DropdownMenuItem(
                             value: value,
                             child: new Text(value),
@@ -114,7 +114,7 @@ class _LeaveFormState extends State<LeaveForm> {
                 },
               ),
               TextFormField(
-                controller: _purposeController,
+                controller: _subjectController,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.note_add),
                   hintText: 'Enter Subject',
@@ -172,7 +172,7 @@ class _LeaveFormState extends State<LeaveForm> {
                 ),
               ),
               TextFormField(
-                controller: _purposeController,
+                controller: _reasonController,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.speaker_notes),
                   hintText: 'Enter Reason',
