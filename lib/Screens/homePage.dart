@@ -8,6 +8,7 @@ import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:leave_management/Utils/houseKeeping.dart';
 import 'package:leave_management/Screens/pendingApproval.dart';
 import 'package:leave_management/Screens/pastLeaves.dart';
+import 'package:leave_management/Screens/remainingLeaves.dart';
 
 class HomePage extends StatefulWidget {
   final FirebaseUser user;
@@ -193,6 +194,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               title: Text("Check Remaining Leaves"),
                               subtitle: Text(
                                   "Check leaves which are pending approval"),
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return RemainingLeaves();
+                                    },
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),
