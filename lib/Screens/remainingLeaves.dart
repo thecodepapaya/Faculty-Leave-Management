@@ -15,7 +15,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
         shape: BoxShape.circle,
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage('assets/images/images.png'),
+          image: AssetImage('assets/images/image.png'),
         ),
       ),
     );

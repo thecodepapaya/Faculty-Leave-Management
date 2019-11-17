@@ -194,6 +194,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               title: Text("Check Remaining Leaves"),
                               subtitle: Text(
                                   "Check leaves which are pending approval"),
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return RemainingLeaves();
+                                    },
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),
