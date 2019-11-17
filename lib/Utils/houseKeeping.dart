@@ -13,27 +13,27 @@ abstract class HouseKeeping {
     return false;
   }
 
-  static MaterialColor randomColor() {
+  static MaterialColor randomColor({int density}) {
     List _colorsList = <MaterialColor>[
-      Colors.red,
-      Colors.amber,
-      Colors.blue,
-      Colors.blueGrey,
-      Colors.brown,
-      Colors.cyan,
-      Colors.deepOrange,
-      Colors.deepPurple,
-      Colors.green,
-      Colors.grey,
-      Colors.indigo,
-      Colors.lightBlue,
-      Colors.lightGreen,
-      Colors.lime,
-      Colors.orange,
-      Colors.pink,
-      Colors.purple,
-      Colors.teal,
-      Colors.yellow,
+      Colors.red[density],
+      Colors.amber[density],
+      Colors.blue[density],
+      Colors.blueGrey[density],
+      Colors.brown[density],
+      Colors.cyan[density],
+      Colors.deepOrange[density],
+      Colors.deepPurple[density],
+      Colors.green[density],
+      Colors.grey[density],
+      Colors.indigo[density],
+      Colors.lightBlue[density],
+      Colors.lightGreen[density],
+      Colors.lime[density],
+      Colors.orange[density],
+      Colors.pink[density],
+      Colors.purple[density],
+      Colors.teal[density],
+      Colors.yellow[density],
     ];
     return _colorsList[Random().nextInt(19)];
   }
