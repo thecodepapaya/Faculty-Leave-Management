@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:leave_management/Screens/currentApplications.dart';
 import 'package:leave_management/Screens/leaveForm.dart';
-import 'package:leave_management/Screens/onLeave.dart';
-import 'package:leave_management/Screens/showLeave.dart';
+import 'package:leave_management/Screens/previousApplications.dart';
 import 'package:leave_management/Utils/GlobalVariables.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:leave_management/Utils/houseKeeping.dart';
@@ -133,14 +133,14 @@ class _AdminDashboardState extends State<AdminDashboard>
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
                             child: ListTile(
-                              title: Text("Show Leave"),
+                              title: Text("Current Applications"),
                               subtitle:
                                   Text("Check leaves which need your approval"),
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (BuildContext context) {
-                                      return ShowLeave();
+                                      return CurrentApplications();
                                     },
                                   ),
                                 );
@@ -158,13 +158,13 @@ class _AdminDashboardState extends State<AdminDashboard>
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
                             child: ListTile(
-                              title: Text("On Leaves"),
+                              title: Text("Previous Applications"),
                               subtitle: Text("Check past leaves record"),
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (BuildContext context) {
-                                      return OnLeave();
+                                      return PreviousApplications();
                                     },
                                   ),
                                 );
