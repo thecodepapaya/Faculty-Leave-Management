@@ -1,5 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/widgets.dart' as leavePdf;
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
 
 class PastLeaveDetails extends StatefulWidget {
   @override
@@ -12,92 +17,151 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
     return LeaveScaffold(
       title: "Leave Details",
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-              child: Text(
-                "Type: Medical Leave",
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "From: Ashish Phophalia",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "To: Director",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "Date: 21/22/23",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "Subject: Leave for Cold",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "I want Leave djbasdkv vbnadbd vadn cas kas ckas as c asc as cas cas cas c ashc ash chas cas cka ca cas cnas cksa ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac asnkc askc asnk casnc ask casnkc asnk nc anks casnkc nkas cnkas cnkas cnas cnkas cnas cnkas c asnkc asnk ckasnc asnkc asnk casnkc asnkc asnkc ank ankc ankc asnkc asnk casnk casnkc nkas cnkas casnk cnas cnasc asnkc asnkc nas c askc asnc kasc asnk casnk casn cnkas cnkas cnkas c",
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "From 1/2/3",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "To 4/5/6",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 18.0, bottom: 10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(style: BorderStyle.solid)),
-                    padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                    child: Text(
-                      "Sign of Applicant",
-                      style: TextStyle(color: Colors.black38, fontSize: 15),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+        child: leaveDetails(),
       ),
       floatingButton: FloatingActionButton(
         child: Icon(Icons.file_download),
-        onPressed: () {},
+        onPressed: () async {
+          Printing.layoutPdf(
+            onLayout: buildPdf,
+          );
+          // Directory appDocDir = await getApplicationDocumentsDirectory();
+          // String appDocPath = appDocDir.path;
+        },
       ),
+    );
+  }
+
+  List<int> buildPdf(PdfPageFormat format) {
+    leavePdf.Document doc = leavePdf.Document();
+
+    doc.addPage(
+      leavePdf.Page(
+        pageFormat: format,
+        build: (leavePdf.Context context) {
+          return leavePdf.ConstrainedBox(
+            constraints: leavePdf.BoxConstraints.expand(),
+            child: leavePdf.FittedBox(
+              child: leavePdf.Text("Hello World"),
+            ),
+          );
+        },
+      ),
+    );
+
+    // doc.addPage(
+    //   leavePdf.Page(
+    //     pageFormat: format,
+    //     build: (pdf.Context context) {
+    //       return pdf.ConstrainedBox(
+    //         constraints: const pdf.BoxConstraints.expand(),
+    //         child: pdf.FittedBox(
+    //           child: pdf.Text(
+    //             'Hello World',
+    //           ),
+    //         ),
+    //       );
+    //     },
+    //   ),
+    // );
+
+    // final leavePdf.Document pdf = leavePdf.Document();
+    // final Directory output = await getApplicationDocumentsDirectory();
+    // final File file = File("${output.path}/leave.pdf");
+    // // final file = File("example.pdf");
+    // await file.writeAsBytes(pdf.save());
+    // print("File saved at :${output.path}/leave.pdf");
+
+    return doc.save();
+  }
+
+  Widget leaveDetails() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+          child: Text(
+            "Type: Medical Leave",
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "From: Ashish Phophalia",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "To: Director",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "Date: 21/22/23",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "Subject: Leave for Cold",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "I want Leave djbasdkv vbnadbd vadn cas kas ckas as c asc as cas"
+                " cas cas c ashc ash chas cas cka ca cas cnas cksa"
+                " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac "
+                "asnkc askc asnk casnc ask casnkc asnk nc anks casnkc nkas cnkas cnkas cnas cnkas cnas "
+                "cnkas c asnkc asnk ckasnc asnkc asnk casnkc asnkc asnkc ank ankc ankc asnkc asnk casnk "
+                "casnkc nkas cnkas casnk cnas cnasc asnkc asnkc nas c askc asnc kasc "
+                "asnk casnk casn cnkas cnkas cnkas c",
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "From 1/2/3",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "To 4/5/6",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0, bottom: 10),
+              child: Container(
+                decoration:
+                    BoxDecoration(border: Border.all(style: BorderStyle.solid)),
+                padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+                child: Text(
+                  "Sign of Applicant",
+                  style: TextStyle(color: Colors.black38, fontSize: 15),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
