@@ -29,11 +29,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     HouseKeeping.updateLastSeen(emailId: widget.user.email);
 
     controller1 =
-        AnimationController(vsync: this, duration: Duration(seconds: 2));
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
     controller2 =
-        AnimationController(vsync: this, duration: Duration(seconds: 2));
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
     controller3 =
-        AnimationController(vsync: this, duration: Duration(seconds: 2));
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
     animation1 = Tween(
       begin: 0.0,
       end: 1.0,
@@ -194,6 +194,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               title: Text("Check Remaining Leaves"),
                               subtitle: Text(
                                   "Check leaves which are pending approval"),
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return RemainingLeaves();
+                                    },
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),
