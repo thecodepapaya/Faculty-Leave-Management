@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,31 @@ abstract class HouseKeeping {
 
   static Future<bool> isAdmin({@required String email}) async {
     return false;
+  }
+
+  static MaterialColor randomColor() {
+    List _colorsList = <MaterialColor>[
+      Colors.red,
+      Colors.amber,
+      Colors.blue,
+      Colors.blueGrey,
+      Colors.brown,
+      Colors.cyan,
+      Colors.deepOrange,
+      Colors.deepPurple,
+      Colors.green,
+      Colors.grey,
+      Colors.indigo,
+      Colors.lightBlue,
+      Colors.lightGreen,
+      Colors.lime,
+      Colors.orange,
+      Colors.pink,
+      Colors.purple,
+      Colors.teal,
+      Colors.yellow,
+    ];
+    return _colorsList[Random().nextInt(19)];
   }
 
   static Future<int> updateHistory() async {
