@@ -8,6 +8,7 @@ import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:leave_management/Utils/houseKeeping.dart';
 import 'package:leave_management/Screens/pendingApproval.dart';
 import 'package:leave_management/Screens/pastLeaves.dart';
+import 'package:leave_management/Screens/remainingLeaves.dart';
 
 class HomePage extends StatefulWidget {
   final FirebaseUser user;

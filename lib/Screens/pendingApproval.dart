@@ -61,7 +61,12 @@ class _PendingApprovalState extends State<PendingApproval> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return LeaveDetails();
+                          return LeaveDetails(
+                            title: "Leave Type",
+                            reason: "Reason for Leave",
+                            fromDate: "ample date",
+                            toDate: "another date",
+                          );
                         },
                       ),
                     );
@@ -92,7 +97,12 @@ class _PendingApprovalState extends State<PendingApproval> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return LeaveDetails();
+                          return LeaveDetails(
+                            title: "Leave Type",
+                            reason: "Reason for Leave",
+                            fromDate: "ample date",
+                            toDate: "another date",
+                          );
                         },
                       ),
                     );
@@ -123,7 +133,12 @@ class _PendingApprovalState extends State<PendingApproval> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return LeaveDetails();
+                          return LeaveDetails(
+                            title: "Leave Type",
+                            reason: "Reason for Leave",
+                            fromDate: "ample date",
+                            toDate: "another date",
+                          );
                         },
                       ),
                     );
