@@ -38,12 +38,107 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
     doc.addPage(
       leavePdf.Page(
         pageFormat: format,
+        clip: false,
         build: (leavePdf.Context context) {
-          return leavePdf.ConstrainedBox(
-            constraints: leavePdf.BoxConstraints.expand(),
-            child: leavePdf.FittedBox(
-              child: leavePdf.Text("Hello World"),
+          return leavePdf.Expanded(
+            // constraints: leavePdf.BoxConstraints.expand(),
+            // child: leavePdf.FittedBox(
+            child: leavePdf.Column(
+              crossAxisAlignment: leavePdf.CrossAxisAlignment.start,
+              children: <leavePdf.Widget>[
+                leavePdf.Container(
+                  alignment: leavePdf.Alignment.center,
+                  padding:
+                      const leavePdf.EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+                  child: leavePdf.Text(
+                    "Type: Medical Leave",
+                    style: leavePdf.TextStyle(fontSize: 20),
+                  ),
+                ),
+                leavePdf.Column(
+                  crossAxisAlignment: leavePdf.CrossAxisAlignment.start,
+                  mainAxisAlignment: leavePdf.MainAxisAlignment.start,
+                  children: <leavePdf.Widget>[
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "From: Ashish Phophalia",
+                        style: leavePdf.TextStyle(fontSize: 30),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "To: Director",
+                        style: leavePdf.TextStyle(fontSize: 30),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "Date: 21/22/23",
+                        style: leavePdf.TextStyle(fontSize: 30),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "Subject: Leave for Cold",
+                        style: leavePdf.TextStyle(fontSize: 30),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "I want Leave djbasdkv vbnadbd vadn cas kas ckas as c asc as cas"
+                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac "
+                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac "
+                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac ",
+                        textAlign: leavePdf.TextAlign.justify,
+                        style: leavePdf.TextStyle(fontSize: 30),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "From 1/2/3",
+                        style: leavePdf.TextStyle(fontSize: 30),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "To 4/5/6",
+                        style: leavePdf.TextStyle(fontSize: 30),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.only(
+                          left: 18.0, bottom: 10),
+                      child: leavePdf.Container(
+                        // decoration:
+                        // leavePdf.BoxDecoration(border: Border.all(style: BorderStyle.solid)),
+                        padding: const leavePdf.EdgeInsets.fromLTRB(
+                            18.0, 10, 18.0, 10),
+                        child: leavePdf.Text(
+                          "Sign of Applicant",
+                          style: leavePdf.TextStyle(
+                              color: PdfColors.black, fontSize: 30),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
+            // ),
           );
         },
       ),
