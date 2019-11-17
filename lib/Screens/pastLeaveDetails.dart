@@ -64,7 +64,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
                         "From: Ashish Phophalia",
-                        style: leavePdf.TextStyle(fontSize: 30),
+                        style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
                     leavePdf.Padding(
@@ -72,7 +72,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
                         "To: Director",
-                        style: leavePdf.TextStyle(fontSize: 30),
+                        style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
                     leavePdf.Padding(
@@ -80,7 +80,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
                         "Date: 21/22/23",
-                        style: leavePdf.TextStyle(fontSize: 30),
+                        style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
                     leavePdf.Padding(
@@ -88,7 +88,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
                         "Subject: Leave for Cold",
-                        style: leavePdf.TextStyle(fontSize: 30),
+                        style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
                     leavePdf.Padding(
@@ -100,7 +100,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                         " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac "
                         " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac ",
                         textAlign: leavePdf.TextAlign.justify,
-                        style: leavePdf.TextStyle(fontSize: 30),
+                        style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
                     leavePdf.Padding(
@@ -108,7 +108,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
                         "From 1/2/3",
-                        style: leavePdf.TextStyle(fontSize: 30),
+                        style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
                     leavePdf.Padding(
@@ -116,7 +116,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
                         "To 4/5/6",
-                        style: leavePdf.TextStyle(fontSize: 30),
+                        style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
                     leavePdf.Padding(
@@ -130,7 +130,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                         child: leavePdf.Text(
                           "Sign of Applicant",
                           style: leavePdf.TextStyle(
-                              color: PdfColors.black, fontSize: 30),
+                              color: PdfColors.black, fontSize: 11),
                         ),
                       ),
                     ),
