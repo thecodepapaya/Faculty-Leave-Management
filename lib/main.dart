@@ -1,5 +1,5 @@
 import 'dart:async';
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:leave_management/Models/AppTimer.dart';
 import 'package:leave_management/Utils/signInHandler.dart';
@@ -10,16 +10,16 @@ void main() async {
   AppTimer ticker = AppTimer();
   WidgetsFlutterBinding.ensureInitialized();
   GlobalVariables.prefs = await SharedPreferences.getInstance();
-  // await Firestore.instance.collection("meta").document("data").setData({
-  //   "lastUsed": FieldValue.serverTimestamp(),
-  // });
+  await Firestore.instance.collection("meta").document("data").setData({
+    "lastUsed": FieldValue.serverTimestamp(),
+  });
 
-  // DocumentSnapshot docSnap =
-  //     await Firestore.instance.collection("meta").document("data").get();
+  DocumentSnapshot docSnap =
+      await Firestore.instance.collection("meta").document("data").get();
   // //get timestamp in milliseconds from FieldValue.serverTimeStamp
   // //in string
-  // GlobalVariables.timeStamp = docSnap.data["lastUsed"].seconds.toString() +
-  //     docSnap.data["lastUsed"].nanoseconds.toString().substring(0, 3);
+  GlobalVariables.timeStamp = docSnap.data["lastUsed"].seconds.toString() +
+      docSnap.data["lastUsed"].nanoseconds.toString().substring(0, 3);
   // print("Time stamp: ${GlobalVariables.timeStamp}");
   // GlobalVariables.timeStamp =
   //     GlobalVariables.prefs.getString(GlobalVariables.timeStampPrefs);
