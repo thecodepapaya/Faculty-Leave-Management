@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 import 'package:flutter/material.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 
@@ -265,4 +262,3 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
     );
   }
 }
->>>>>>> e05bba0e00a1e43de592355c61a57c0d3f086e0c
