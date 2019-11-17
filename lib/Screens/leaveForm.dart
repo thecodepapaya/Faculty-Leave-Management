@@ -9,10 +9,10 @@ class LeaveForm extends StatefulWidget {
 class _LeaveFormState extends State<LeaveForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _sdatecontroller = TextEditingController();
-  TextEditingController _edatecontroller = TextEditingController();
+  TextEditingController _addresseeNameController = TextEditingController();
+  TextEditingController _purposeController = TextEditingController();
+  TextEditingController _startDateController = TextEditingController();
+  TextEditingController _endDateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +51,8 @@ class _LeaveFormState extends State<LeaveForm> {
             },
           );
         },
-        tooltip: "submit",
-        child: Text("Submit"),
+        tooltip: "Submit",
+        child: Icon(Icons.send),
       ),
       body: Container(
         child: Form(
@@ -62,23 +62,23 @@ class _LeaveFormState extends State<LeaveForm> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             children: <Widget>[
               TextFormField(
-                controller: _nameController,
+                controller: _addresseeNameController,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.person),
-                  hintText: 'Enter your first and last name',
-                  labelText: 'Name',
+                  hintText: 'Enter addressee name',
+                  labelText: 'To',
                 ),
               ),
               TextFormField(
-                controller: _phoneController,
+                controller: _purposeController,
                 decoration: const InputDecoration(
-                  icon: const Icon(Icons.adjust),
+                  icon: const Icon(Icons.note_add),
                   hintText: 'Enter a Purpose',
-                  labelText: 'Purpose',
+                  labelText: 'Subject',
                 ),
               ),
               TextFormField(
-                controller: _sdatecontroller,
+                controller: _startDateController,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.date_range),
                   hintText: 'Enter Start Date',
@@ -87,13 +87,21 @@ class _LeaveFormState extends State<LeaveForm> {
                 keyboardType: TextInputType.datetime,
               ),
               TextFormField(
-                controller: _edatecontroller,
+                controller: _endDateController,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.date_range),
                   hintText: 'Enter End Date',
                   labelText: 'Ending date',
                 ),
                 keyboardType: TextInputType.datetime,
+              ),
+              TextFormField(
+                controller: _purposeController,
+                decoration: const InputDecoration(
+                  icon: const Icon(Icons.adjust),
+                  hintText: 'Enter a Purpose',
+                  labelText: 'Purpose',
+                ),
               ),
             ],
           ),

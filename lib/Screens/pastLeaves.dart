@@ -12,165 +12,64 @@ class _PastLeavesState extends State<PastLeaves> {
     return Text(type + "\n" + "From :" + from + "\n" + "To :" + to);
   }
 
+  Widget cardBuilder(String title, String type, String from, String to) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.1,
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: ListTile(
+              title: Text(title),
+              subtitle: listDetail(type, from, to),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return LeaveDetails(
+                        title: type,
+                        reason: title,
+                        fromDate: from,
+                        toDate: to,
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return LeaveScaffold(
-      title: "Past Leavse",
+      title: "Past Leaves",
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Card(
-                child: ListTile(
-                  title: Text("Leave due to fever"),
-                  subtitle: listDetail(
-                      "Medical Leave", "October 10 ,2019", "October 25 ,2019"),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LeaveDetails();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Card(
-                child: ListTile(
-                  title: Text("Leave for perosnal reason"),
-                  subtitle: listDetail("Casual Leave", "September 14 ,2019",
-                      "September 17 ,2019"),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LeaveDetails();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Card(
-                child: ListTile(
-                  title: Text("Vacation"),
-                  subtitle:
-                      listDetail("Vacation", "May 12 ,2019", "June 25 ,2019"),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LeaveDetails();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Card(
-                child: ListTile(
-                  title: Text("Leave due to cough and cold"),
-                  subtitle: listDetail(
-                      "Sick Leave", "April 15 ,2019", "April 16 ,2019"),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LeaveDetails();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Card(
-                child: ListTile(
-                  title: Text("Child-care Leave"),
-                  subtitle: listDetail(
-                      "Child Care Leave", "March 4 ,2019", "March 24 ,2019"),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LeaveDetails();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Card(
-                child: ListTile(
-                  title: Text("Paternity"),
-                  subtitle: listDetail("Paternity Leave", "February 20 ,2019",
-                      "February 28 ,2019"),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LeaveDetails();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Card(
-                child: ListTile(
-                  title: Text("Leave due to Viral Fever"),
-                  subtitle: listDetail(
-                      "Medical Leave", "January 10 ,2019", "January 15 ,2019"),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LeaveDetails();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Card(
-                child: ListTile(
-                  title: Text("Leave due to personal reason"),
-                  subtitle: listDetail("Casual Leave", "December 20 ,2018",
-                      "December 25 , 2018"),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LeaveDetails();
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
+            cardBuilder("Leave due to cough and cold", "Medical Leave",
+                "October 15 ,2019", "October 17 ,2019"),
+            cardBuilder("Leave for personal reason", "Casual Leave",
+                "September 14 ,2019", "September 17 ,2019"),
+            cardBuilder(
+                "Vacation", "Vacation", "May 12 ,2019", "June 25 ,2019"),
+            cardBuilder("Leave due to cough and cold", "Sick Leave",
+                "April 15 ,2019", "April 16 ,2019"),
+            cardBuilder("Child-care Leave", "Child Care Leave", "March 4 ,2019",
+                "March 24 ,2019"),
+            cardBuilder("Paternity", "Paternity Leave", "February 20 ,2019",
+                "February 28 ,2019"),
+            cardBuilder("Leave due to Viral Fever", "Medical Leave",
+                "January 10 ,2019", "January 15 ,2019"),
+            cardBuilder("Leave due to personal reason", "Casual Leave",
+                "December 20 ,2018", "December 25 , 2018"),
           ],
         ),
       ),
