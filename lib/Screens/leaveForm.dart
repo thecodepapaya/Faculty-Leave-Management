@@ -111,6 +111,15 @@ class _LeaveFormState extends State<LeaveForm> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             children: <Widget>[
               new FormField(
+                validator: (String value) {
+                  if (value == null) {
+                    return "Cannot be empty";
+                  } else if (value.isEmpty || value == '') {
+                    return "Cannot be empty";
+                  } else {
+                    return null;
+                  }
+                },
                 builder: (FormFieldState state) {
                   return InputDecorator(
                     decoration: InputDecoration(
