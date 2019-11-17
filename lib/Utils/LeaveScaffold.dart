@@ -1,6 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:leave_management/Screens/adminDashboard.dart';
+import 'package:leave_management/Screens/currentApplications.dart';
+
+import 'GlobalVariables.dart';
 
 class LeaveScaffold extends StatefulWidget {
   final String title;
@@ -27,6 +31,20 @@ class _LeaveScaffoldState extends State<LeaveScaffold> {
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
               await GoogleSignIn().signOut();
+            },
+          ),
+          FlatButton(
+            child: Icon(Icons.home),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return AdminDashboard(
+                      user: GlobalVariables.user,
+                    );
+                  },
+                ),
+              );
             },
           ),
         ],

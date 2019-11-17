@@ -208,26 +208,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           ),
                         ),
                       ),
-                      FlatButton(
-                        child: Container(
-                          child: Text("Admin Dashboard"),
-                          width: 200,
-                          height: 50,
-                          padding: const EdgeInsets.all(15),
-                        ),
-                        color: Colors.teal[200],
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return AdminDashboard(
-                                  user: GlobalVariables.user,
-                                );
-                              },
-                            ),
-                          );
-                        },
-                      ),
                     ],
                   ),
                 ),
