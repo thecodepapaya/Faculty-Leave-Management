@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:leave_management/Utils/LeaveScaffold.dart';
+import 'package:leave_management/Screens/leaveDetails.dart';
 
 class PendingApproval extends StatefulWidget {
   @override
@@ -8,29 +10,6 @@ class PendingApproval extends StatefulWidget {
 class _PendingApprovalState extends State<PendingApproval> {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Pending Approvals"),
-      ),
-      body: ListView(
-        children: <Widget>[
-          ListTile(
-            title: Text("Medical Leave"),
-            subtitle: Text("For High Fever"),
-          ),
-          ListTile(
-            title: Text("Casual Leave"),
-          ),
-          ListTile(
-            title: Text("Full Pay Leave"),
-          ),
-          ListTile(
-            title: Text("Child Care"),
-            subtitle: Text("For 12th Boards"),
-          )
-        ],
-=======
     return LeaveScaffold(
       title: "Pending Approvals",
       body: SingleChildScrollView(
@@ -145,7 +124,6 @@ class _PendingApprovalState extends State<PendingApproval> {
             )
           ],
         ),
->>>>>>> aeb7f17418d3c9bf1b918935e424286568c61e98
       ),
     );
   }
