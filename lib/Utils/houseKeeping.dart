@@ -13,8 +13,8 @@ abstract class HouseKeeping {
     return false;
   }
 
-  static MaterialColor randomColor({int density}) {
-    List _colorsList = <MaterialColor>[
+  static Color randomColor({int density}) {
+    List _colorsList = <Color>[
       Colors.red[density],
       Colors.amber[density],
       Colors.blue[density],
