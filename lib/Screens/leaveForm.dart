@@ -74,7 +74,9 @@ class _LeaveFormState extends State<LeaveForm> {
                         "subject": _subjectController.text,
                         "startdate": _startDateController.text,
                         "enddate": _endDateController.text,
-                        "name": GlobalVariables.user.displayName
+                        "name": GlobalVariables.user.displayName,
+                        "checked": false,
+                        "granted": false,
                       }).then((onValue) {
                         Navigator.pop(context);
                         Navigator.pop(context);
