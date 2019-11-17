@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:leave_management/Screens/leaveDetails.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
+import 'package:leave_management/Screens/leaveDetails.dart';
 
 class PendingApproval extends StatefulWidget {
   @override

@@ -1,4 +1,6 @@
-class Paternity {
+import 'medical.dart';
+
+class Paternity extends Medical {
   final duration = 15;
   final isAppendable = false;
   final maxConsecutive = 15;
