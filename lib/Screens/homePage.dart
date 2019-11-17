@@ -45,10 +45,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     Timer(Duration(milliseconds: 0), () {
       controller1.forward();
     });
-    Timer(Duration(milliseconds: 200), () {
+    Timer(Duration(milliseconds: 300), () {
       controller2.forward();
     });
-    Timer(Duration(milliseconds: 400), () {
+    Timer(Duration(milliseconds: 600), () {
       controller3.forward();
     });
   }
@@ -63,13 +63,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               children: <Widget>[
                 ClipRRect(
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(25.0),
-                    bottomRight: Radius.circular(25.0),
+                    bottomLeft: Radius.elliptical(150.0, 50.0),
+                    bottomRight: Radius.elliptical(150.0, 50.0),
                   ),
                   child: Image(
                     width: double.infinity,
                     fit: BoxFit.fill,
-                    image: AssetImage('assets/images/images.png'),
+                    image: AssetImage('assets/images/image.png'),
                   ),
                 ),
                 // Image.asset('assets/images/green.jpg',),
