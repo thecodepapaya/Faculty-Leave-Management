@@ -145,6 +145,8 @@ class _LeaveFormState extends State<LeaveForm> {
                   hintText: 'Enter Subject',
                   labelText: 'Subject',
                 ),
+                maxLines: 2,
+                maxLength: 50,
               ),
               // TextFormField(
               //   controller: _startDateController,
@@ -203,6 +205,8 @@ class _LeaveFormState extends State<LeaveForm> {
                   hintText: 'Enter Reason',
                   labelText: 'Reason',
                 ),
+                maxLines: null,
+                maxLength: 500,
               ),
             ],
           ),
