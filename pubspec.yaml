@@ -28,6 +28,8 @@ dependencies:
   shimmer: ^1.0.1
   cloud_firestore: ^0.12.9+6
   firebase_messaging: ^5.1.6
+  shared_preferences: ^0.5.4+5
+
 
 dev_dependencies:
   flutter_test:

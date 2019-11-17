@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:leave_management/Screens/leaveForm.dart';
+import 'package:leave_management/Utils/GlobalVariables.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:leave_management/Utils/houseKeeping.dart';
 import 'package:leave_management/Screens/pendingApproval.dart';
@@ -10,7 +11,9 @@ import 'package:leave_management/Screens/pastLeaves.dart';
 
 class HomePage extends StatefulWidget {
   final FirebaseUser user;
-  HomePage({@required this.user});
+  HomePage({@required this.user}) {
+    GlobalVariables.user = this.user;
+  }
   @override
   _HomePageState createState() => _HomePageState();
 }
