@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    HouseKeeping.updateLastSeen(emailId: widget.user.email);
+    // HouseKeeping.updateLastSeen(emailId: widget.user.email);
 
     controller1 =
         AnimationController(vsync: this, duration: Duration(seconds: 1));
