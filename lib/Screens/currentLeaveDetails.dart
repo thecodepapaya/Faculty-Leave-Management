@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class CurrentLeaveDetails extends StatefulWidget {
   @override
@@ -87,6 +88,14 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                       "Sign of Applicant",
                       style: TextStyle(color: Colors.black38, fontSize: 15),
                     ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(18, 10, 18, 10),
+                  child: QrImage(
+                    data: "1234567890",
+                    version: QrVersions.auto,
+                    size: 200.0,
                   ),
                 ),
                 Padding(
