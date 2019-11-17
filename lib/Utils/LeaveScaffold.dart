@@ -30,18 +30,6 @@ class _LeaveScaffoldState extends State<LeaveScaffold> {
               await GoogleSignIn().signOut();
             },
           ),
-          FlatButton(
-            child: Icon(Icons.home),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return CurrentApplications();
-                  },
-                ),
-              );
-            },
-          )
         ],
       ),
       body: widget.body,

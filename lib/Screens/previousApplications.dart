@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:leave_management/Screens/pastLeaveDetails.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 
-import 'currentLeaveDetails.dart';
-
-class CurrentApplications extends StatefulWidget {
+class PreviousApplications extends StatefulWidget {
   @override
-  _CurrentApplicationsState createState() => _CurrentApplicationsState();
+  _PreviousApplicationsState createState() => _PreviousApplicationsState();
 }
 
-class _CurrentApplicationsState extends State<CurrentApplications> {
+class _PreviousApplicationsState extends State<PreviousApplications> {
   Widget cardBuilder(String name, String reason) {
     return Card(
       margin: EdgeInsets.all(10),
@@ -48,7 +47,7 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return CurrentLeaveDetails();
+                return PastLeaveDetails();
               },
             ),
           );
@@ -61,10 +60,10 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
   @override
   Widget build(BuildContext context) {
     return LeaveScaffold(
-      title: "Current Applications",
+      title: "Previous Applications",
       body: GridView.count(
         crossAxisCount: 2,
-        children: List<Widget>.generate(16, (index) {
+        children: List<Widget>.generate(8, (index) {
           return GridTile(child: cardBuilder("name", "reason"));
         }),
       ),
