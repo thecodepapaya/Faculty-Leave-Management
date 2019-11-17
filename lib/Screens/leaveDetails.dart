@@ -24,8 +24,8 @@ class _LeaveDetailsState extends State<LeaveDetails> {
       child: Card(
         // color: HouseKeeping.randomColor(density: 100),
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.12,
-          width: MediaQuery.of(context).size.width * 1,
+          height: 130,
+          width: 450,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -35,7 +35,7 @@ class _LeaveDetailsState extends State<LeaveDetails> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(title,
                       style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.height * 0.025,
+                        fontSize: 25,
                         fontWeight: FontWeight.w500,
                       )),
                 ),
@@ -47,9 +47,7 @@ class _LeaveDetailsState extends State<LeaveDetails> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         description,
-                        style: TextStyle(
-                            fontSize:
-                                MediaQuery.of(context).size.height * 0.02),
+                        style: TextStyle(fontSize: 15),
                       ),
                     )),
                   ],
@@ -76,9 +74,7 @@ class _LeaveDetailsState extends State<LeaveDetails> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               widget.title,
-              style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.height * 0.04,
-                  fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
             ),
           ),
           Expanded(
