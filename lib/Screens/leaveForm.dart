@@ -8,6 +8,24 @@ class LeaveForm extends StatefulWidget {
 
 class _LeaveFormState extends State<LeaveForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String _leave = ' ';
+  List<String> _leaves = <String>[
+    ' ',
+    'CasualLeave',
+    'ChildCare',
+    'Maternity',
+    'Medical',
+    'Paternity',
+    'Half paid',
+    'Full paid',
+    'Special Casual',
+    'Vacation',
+    'ExtraOrdinary',
+    'LeaveNotDue',
+    'Lien',
+    'Sabbatical',
+    'Special',
+  ];
 
   TextEditingController _addresseeNameController = TextEditingController();
   TextEditingController _purposeController = TextEditingController();
@@ -61,13 +79,35 @@ class _LeaveFormState extends State<LeaveForm> {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             children: <Widget>[
-              TextFormField(
-                controller: _addresseeNameController,
-                decoration: const InputDecoration(
-                  icon: const Icon(Icons.person),
-                  hintText: 'Enter addressee name',
-                  labelText: 'To',
-                ),
+              new FormField(
+                builder: (FormFieldState state) {
+                  return InputDecorator(
+                    decoration: InputDecoration(
+                      icon: const Icon(Icons.home),
+                      labelText: 'Leaves',
+                    ),
+                    isEmpty: _leave == ' ',
+                    child: new DropdownButtonHideUnderline(
+                      child: new DropdownButton(
+                        hint: Text("Select Leaves"),
+                        value: _leave,
+                        isDense: true,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            _leave = newValue;
+                            state.didChange(newValue);
+                          });
+                        },
+                        items: _leaves.map((String value) {
+                          return new DropdownMenuItem(
+                            value: value,
+                            child: new Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  );
+                },
               ),
               TextFormField(
                 controller: _purposeController,
