@@ -58,6 +58,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    controller1.dispose();
+    controller2.dispose();
+    controller3.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return !widget.user.email.endsWith("@iiitvadodara.ac.in")
         ? notAllowedScreen()
@@ -128,7 +136,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         height: 10,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        padding: const EdgeInsets.only(left: 15, right: 15),
                         child: FadeTransition(
                           // controller.forward(),
                           child: Card(

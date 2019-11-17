@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:leave_management/Screens/leaveDetails.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
+import 'package:leave_management/Screens/leaveDetails.dart';
 
 class PendingApproval extends StatefulWidget {
   @override
@@ -22,13 +22,15 @@ class _PendingApprovalState extends State<PendingApproval> {
                   leading: Container(
                     height: 50,
                     width: 50,
-                    color: Colors.red,
                     alignment: Alignment.center,
                     child: Icon(
                       Icons.add,
                       color: Colors.white,
                       size: 26,
                     ),
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                   title: Text("Medical Leave"),
                   subtitle: Text("For High Fever"),
@@ -44,12 +46,14 @@ class _PendingApprovalState extends State<PendingApproval> {
                   leading: Container(
                     height: 50,
                     width: 50,
-                    color: Colors.blue,
                     alignment: Alignment.center,
                     child: Text(
                       "C",
                       style: TextStyle(fontSize: 24, color: Colors.white),
                     ),
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                   title: Text("Casual Leave"),
                   subtitle: Text("Leave no.: 5"),
@@ -75,15 +79,18 @@ class _PendingApprovalState extends State<PendingApproval> {
               child: Card(
                 child: ListTile(
                   leading: Container(
-                      height: 50,
-                      width: 50,
-                      color: Colors.green,
-                      alignment: Alignment.center,
-                      child: Icon(
-                        Icons.attach_money,
-                        size: 26,
-                        color: Colors.white,
-                      )),
+                    height: 50,
+                    width: 50,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.attach_money,
+                      size: 26,
+                      color: Colors.white,
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
                   title: Text("Full Pay Leave"),
                   subtitle: Text("Leave no.: 3"),
                   onTap: () {
@@ -110,13 +117,15 @@ class _PendingApprovalState extends State<PendingApproval> {
                   leading: Container(
                     height: 50,
                     width: 50,
-                    color: Colors.brown,
                     alignment: Alignment.center,
                     child: Icon(
                       Icons.child_care,
                       color: Colors.white,
                       size: 26,
                     ),
+                    decoration: BoxDecoration(
+                        color: Colors.brown,
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                   title: Text("Child Care"),
                   subtitle: Text("For 12th Boards"),
