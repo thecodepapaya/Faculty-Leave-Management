@@ -41,12 +41,16 @@ class _PendingApprovalState extends State<PendingApproval> {
             ),
             title: Text("Casual Leave"),
             subtitle: Text("Leave no.: 5"),
-
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context) {
-                    return LeaveDetails();
+                    return LeaveDetails(
+                      title: "dkjsbc",
+                      reason: "sample text",
+                      fromDate: "sample date",
+                      toDate: "Another Date",
+                    );
                   },
                 ),
               );
@@ -69,7 +73,12 @@ class _PendingApprovalState extends State<PendingApproval> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context) {
-                    return LeaveDetails();
+                    return LeaveDetails(
+                      title: "dkjsbc",
+                      reason: "sample text",
+                      fromDate: "sample date",
+                      toDate: "Another Date",
+                    );
                   },
                 ),
               );
@@ -92,7 +101,12 @@ class _PendingApprovalState extends State<PendingApproval> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (BuildContext context) {
-                    return LeaveDetails();
+                    return LeaveDetails(
+                      title: "dkjsbc",
+                      reason: "sample text",
+                      fromDate: "sample date",
+                      toDate: "Another Date",
+                    );
                   },
                 ),
               );
