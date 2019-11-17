@@ -1,5 +1,7 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
+import 'package:intl/intl.dart';
 
 class LeaveForm extends StatefulWidget {
   @override
@@ -11,8 +13,8 @@ class _LeaveFormState extends State<LeaveForm> {
   String _leave = ' ';
   List<String> _leaves = <String>[
     ' ',
-    'CasualLeave',
-    'ChildCare',
+    'Casual Leave',
+    'Child Care',
     'Maternity',
     'Medical',
     'Paternity',
@@ -20,8 +22,8 @@ class _LeaveFormState extends State<LeaveForm> {
     'Full paid',
     'Special Casual',
     'Vacation',
-    'ExtraOrdinary',
-    'LeaveNotDue',
+    'Extra Ordinary',
+    'Leave Not Due',
     'Lien',
     'Sabbatical',
     'Special',
@@ -31,6 +33,8 @@ class _LeaveFormState extends State<LeaveForm> {
   TextEditingController _purposeController = TextEditingController();
   TextEditingController _startDateController = TextEditingController();
   TextEditingController _endDateController = TextEditingController();
+
+  final format = DateFormat("dd-MMM-yyyy");
 
   @override
   Widget build(BuildContext context) {
@@ -113,34 +117,66 @@ class _LeaveFormState extends State<LeaveForm> {
                 controller: _purposeController,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.note_add),
-                  hintText: 'Enter a Purpose',
+                  hintText: 'Enter Subject',
                   labelText: 'Subject',
                 ),
               ),
-              TextFormField(
+              // TextFormField(
+              //   controller: _startDateController,
+              //   decoration: const InputDecoration(
+              //     icon: const Icon(Icons.date_range),
+              //     hintText: 'Enter Start Date',
+              //     labelText: 'Starting date',
+              //   ),
+              //   keyboardType: TextInputType.datetime,
+              // ),
+              DateTimeField(
                 controller: _startDateController,
+                format: DateFormat("dd-MMM-yyyy"),
+                onShowPicker: (context, currentValue) {
+                  return showDatePicker(
+                      context: context,
+                      firstDate: DateTime(1900),
+                      initialDate: currentValue ?? DateTime.now(),
+                      lastDate: DateTime(2100));
+                },
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.date_range),
                   hintText: 'Enter Start Date',
                   labelText: 'Starting date',
                 ),
-                keyboardType: TextInputType.datetime,
               ),
-              TextFormField(
+              // TextFormField(
+              //   controller: _endDateController,
+              //   decoration: const InputDecoration(
+              //     icon: const Icon(Icons.date_range),
+              //     hintText: 'Enter End Date',
+              //     labelText: 'Ending date',
+              //   ),
+              //   keyboardType: TextInputType.datetime,
+              // ),
+              DateTimeField(
                 controller: _endDateController,
+                format: DateFormat("dd-MMM-yyyy"),
+                onShowPicker: (context, currentValue) {
+                  return showDatePicker(
+                      context: context,
+                      firstDate: DateTime(1900),
+                      initialDate: currentValue ?? DateTime.now(),
+                      lastDate: DateTime(2100));
+                },
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.date_range),
-                  hintText: 'Enter End Date',
-                  labelText: 'Ending date',
+                  hintText: 'Enter Start Date',
+                  labelText: 'Starting date',
                 ),
-                keyboardType: TextInputType.datetime,
               ),
               TextFormField(
                 controller: _purposeController,
                 decoration: const InputDecoration(
-                  icon: const Icon(Icons.adjust),
-                  hintText: 'Enter a Purpose',
-                  labelText: 'Purpose',
+                  icon: const Icon(Icons.speaker_notes),
+                  hintText: 'Enter Reason',
+                  labelText: 'Reason',
                 ),
               ),
             ],
