@@ -76,7 +76,7 @@ class _LeaveFormState extends State<LeaveForm> {
                         "startDate": _startDateController.text,
                         "endDate": _endDateController.text,
                         "name": GlobalVariables.user.displayName,
-                        "type": _leaveType
+                        "type": _leaveType,
                         "isChecked": false,
                         "isGranted": false,
                         "epochTime":

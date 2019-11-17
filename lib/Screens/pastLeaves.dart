@@ -12,7 +12,7 @@ class _PastLeavesState extends State<PastLeaves> {
   Widget listDetail(String type, String from, String to) {
     return Text(
       type + "\n" + "From :" + from + "\n" + "To :" + to,
-      style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.02),
+      style: TextStyle(fontSize: 15),
     );
   }
 
@@ -29,13 +29,12 @@ class _PastLeavesState extends State<PastLeaves> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.11,
-            width: MediaQuery.of(context).size.width * 0.9,
+            height: 130,
+            width: 450,
             child: ListTile(
               title: Text(
                 title,
-                style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.height * 0.025),
+                style: TextStyle(fontSize: 25),
               ),
               subtitle: listDetail(type, from, to),
               onTap: () {
