@@ -10,7 +10,10 @@ class PastLeaves extends StatefulWidget {
 
 class _PastLeavesState extends State<PastLeaves> {
   Widget listDetail(String type, String from, String to) {
-    return Text(type + "\n" + "From :" + from + "\n" + "To :" + to);
+    return Text(
+      type + "\n" + "From :" + from + "\n" + "To :" + to,
+      style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.02),
+    );
   }
 
   Widget cardBuilder(
@@ -26,10 +29,14 @@ class _PastLeavesState extends State<PastLeaves> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
+            height: MediaQuery.of(context).size.height * 0.11,
             width: MediaQuery.of(context).size.width * 0.9,
             child: ListTile(
-              title: Text(title),
+              title: Text(
+                title,
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.height * 0.025),
+              ),
               subtitle: listDetail(type, from, to),
               onTap: () {
                 Navigator.of(context).push(
@@ -62,8 +69,11 @@ class _PastLeavesState extends State<PastLeaves> {
         child: Container(
           child: Column(
             children: <Widget>[
-              cardBuilder("Leave due to cough and cold", "Medical Leave",
-                  "October 15 ,2019", "October 17 ,2019"),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                child: cardBuilder("Leave due to cough and cold",
+                    "Medical Leave", "October 15 ,2019", "October 17 ,2019"),
+              ),
               cardBuilder("Leave for personal reason", "Casual Leave",
                   "September 14 ,2019", "September 17 ,2019"),
               cardBuilder(
@@ -76,8 +86,11 @@ class _PastLeavesState extends State<PastLeaves> {
                   "February 28 ,2019"),
               cardBuilder("Leave due to Viral Fever", "Medical Leave",
                   "January 10 ,2019", "January 15 ,2019"),
-              cardBuilder("Leave due to personal reason", "Casual Leave",
-                  "December 20 ,2018", "December 25 , 2018"),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 8),
+                child: cardBuilder("Leave due to personal reason",
+                    "Casual Leave", "December 20 ,2018", "December 25 , 2018"),
+              ),
             ],
           ),
           // decoration: BoxDecoration(color: Colors.blue[100]),

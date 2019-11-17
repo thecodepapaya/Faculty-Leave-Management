@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
+import 'package:leave_management/Utils/houseKeeping.dart';
 
 class LeaveDetails extends StatefulWidget {
   final String title;
@@ -21,6 +22,7 @@ class _LeaveDetailsState extends State<LeaveDetails> {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Card(
+        // color: HouseKeeping.randomColor(density: 100),
         child: Container(
           height: MediaQuery.of(context).size.height * 0.12,
           width: MediaQuery.of(context).size.width * 1,
@@ -31,10 +33,11 @@ class _LeaveDetailsState extends State<LeaveDetails> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    title,
-                    style: TextStyle(fontSize: 20.0),
-                  ),
+                  child: Text(title,
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.height * 0.025,
+                        fontWeight: FontWeight.w500,
+                      )),
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +45,12 @@ class _LeaveDetailsState extends State<LeaveDetails> {
                     SingleChildScrollView(
                         child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(description),
+                      child: Text(
+                        description,
+                        style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.02),
+                      ),
                     )),
                   ],
                 )
@@ -50,8 +58,8 @@ class _LeaveDetailsState extends State<LeaveDetails> {
             ),
           ),
         ),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        // shape:
+        //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
     );
   }
@@ -68,7 +76,9 @@ class _LeaveDetailsState extends State<LeaveDetails> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               widget.title,
-              style: TextStyle(fontSize: 30.0),
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.04,
+                  fontWeight: FontWeight.w500),
             ),
           ),
           Expanded(
