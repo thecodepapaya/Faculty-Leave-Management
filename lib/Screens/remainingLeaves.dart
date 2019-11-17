@@ -9,8 +9,8 @@ class RemainingLeaves extends StatefulWidget {
 class _RemainingLeavesState extends State<RemainingLeaves> {
   Widget get image1 {
     return Container(
-      width: 100.0,
-      height: 100.0,
+      width: 70.0,
+      height: 70.0,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         image: DecorationImage(
@@ -24,7 +24,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
   Widget detailsCard(String title, Color dikh) {
     return Container(
       width: 450,
-      height: 115.0,
+      height: 100.0,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -69,26 +69,26 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard("MedicalLeave", Colors.red[300]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 19.0, vertical: 8.0),
+                  const EdgeInsets.symmetric(horizontal: 19.0, vertical: 1.0),
               child: Container(
                 height: 115,
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard("Casual Leave", Colors.blue[300]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),
@@ -101,10 +101,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard("Paid Leave", Colors.green[300]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),
@@ -117,10 +117,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard("Child Care", Colors.deepPurple[200]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),
@@ -133,11 +133,11 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard(
                           "Paternity Leave", Colors.lightGreen[200]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),
@@ -150,11 +150,11 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard(
                           "Special Casual Leave", Colors.orange[200]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),
@@ -167,10 +167,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard("Vacation Leave", Colors.red[300]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),
@@ -183,10 +183,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard("Extra ordinary", Colors.blue[300]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),
@@ -199,10 +199,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard("Leave not due", Colors.green[300]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),
@@ -215,10 +215,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard("Lien", Colors.deepPurple[200]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),
@@ -231,11 +231,11 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard(
                           "Sabattial Leave", Colors.lightGreen[200]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),
@@ -248,10 +248,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      left: 50.0,
+                      left: 40.0,
                       child: detailsCard("Special Leave", Colors.orange[200]),
                     ),
-                    Positioned(top: 7.5, child: image1),
+                    Positioned(top: 16.5, child: image1),
                   ],
                 ),
               ),

@@ -77,6 +77,7 @@ class _LeaveFormState extends State<LeaveForm> {
                         "name": GlobalVariables.user.displayName,
                         "checked": false,
                         "granted": false,
+                        "type": _leaveType
                       }).then((onValue) {
                         Navigator.pop(context);
                         Navigator.pop(context);
