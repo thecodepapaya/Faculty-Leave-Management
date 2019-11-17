@@ -2,6 +2,8 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:intl/intl.dart';
+import 'package:leave_management/Utils/GlobalVariables.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LeaveForm extends StatefulWidget {
   @override
@@ -62,7 +64,22 @@ class _LeaveFormState extends State<LeaveForm> {
                   ),
                   FlatButton(
                     textColor: Colors.blue,
-                    onPressed: () {},
+                    onPressed: () async {
+                      await Firestore.instance
+                          .collection("admin")
+                          .document("${GlobalVariables.user.email}" +
+                              DateTime.now().millisecondsSinceEpoch.toString())
+                          .setData({
+                        "reason": _reasonController.text,
+                        "subject": _subjectController.text,
+                        "startdate": _startDateController.text,
+                        "enddate": _endDateController.text,
+                        "name": GlobalVariables.user.displayName
+                      }).then((onValue) {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      });
+                    },
                     child: Text(
                       "Proceed",
                       style: TextStyle(fontSize: 20),
