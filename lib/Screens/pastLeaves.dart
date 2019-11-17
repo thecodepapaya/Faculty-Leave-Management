@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leave_management/Screens/leaveDetails.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
-import 'package:leave_management/Utils/houseKeeping.dart';
 
 class PastLeaves extends StatefulWidget {
   @override
@@ -10,7 +9,10 @@ class PastLeaves extends StatefulWidget {
 
 class _PastLeavesState extends State<PastLeaves> {
   Widget listDetail(String type, String from, String to) {
-    return Text(type + "\n" + "From :" + from + "\n" + "To :" + to);
+    return Text(
+      type + "\n" + "From :" + from + "\n" + "To :" + to,
+      style: TextStyle(fontSize: 15),
+    );
   }
 
   Widget cardBuilder(
@@ -28,10 +30,13 @@ class _PastLeavesState extends State<PastLeaves> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-            width: MediaQuery.of(context).size.width * 0.9,
+            height: 130,
+            width: 450,
             child: ListTile(
-              title: Text(title),
+              title: Text(
+                title,
+                style: TextStyle(fontSize: 25),
+              ),
               subtitle: listDetail(type, from, to),
               onTap: () {
                 Navigator.of(context).push(
