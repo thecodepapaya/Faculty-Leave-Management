@@ -1,5 +1,4 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:intl/intl.dart';
@@ -66,10 +65,12 @@ class _LeaveFormState extends State<LeaveForm> {
                   FlatButton(
                     textColor: Colors.blue,
                     onPressed: () async {
+                      String epochTime =
+                          DateTime.now().millisecondsSinceEpoch.toString();
                       await Firestore.instance
                           .collection("admin")
-                          .document("${GlobalVariables.user.email} " +
-                              DateTime.now().millisecondsSinceEpoch.toString())
+                          .document(
+                              "${GlobalVariables.user.email} " + epochTime)
                           .setData({
                         "reason": _reasonController.text,
                         "subject": _subjectController.text,
@@ -79,8 +80,9 @@ class _LeaveFormState extends State<LeaveForm> {
                         "type": _leaveType,
                         "isChecked": false,
                         "isGranted": false,
-                        "epochTime":
-                            DateTime.now().millisecondsSinceEpoch.toString(),
+                        "epochTime": epochTime,
+                        "email": GlobalVariables.user.email,
+                        "photoUrl": GlobalVariables.user.phoneNumber,
                       }).then((onValue) {
                         Navigator.pop(context);
                         Navigator.pop(context);
@@ -143,6 +145,8 @@ class _LeaveFormState extends State<LeaveForm> {
                   hintText: 'Enter Subject',
                   labelText: 'Subject',
                 ),
+                maxLines: 2,
+                maxLength: 50,
               ),
               // TextFormField(
               //   controller: _startDateController,
@@ -201,6 +205,8 @@ class _LeaveFormState extends State<LeaveForm> {
                   hintText: 'Enter Reason',
                   labelText: 'Reason',
                 ),
+                maxLines: null,
+                maxLength: 500,
               ),
             ],
           ),

@@ -23,7 +23,7 @@ class GlobalVariables {
   static const String specialCasual = 'Special Casual Leave';
   static const String vacation = 'Vacation Leave';
   static const String extraOrdinary = 'Extra Ordinary Leave';
-  static const String leaveNotDue = 'Leave Not Due Leave';
+  static const String leaveNotDue = 'Leave Not Due';
   static const String lien = 'Lien Leave';
   static const String sabbatical = 'Sabbatical Leave';
   static const String special = 'Special Leave';
