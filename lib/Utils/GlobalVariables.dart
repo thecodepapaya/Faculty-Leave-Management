@@ -7,12 +7,12 @@ class GlobalVariables {
 
   static List<dynamic> adminEmails;
 
-  static String emailPrefs = "emailPrefs";
-  static String namePrefs = "namePrefs";
+  // static String emailPrefs = "emailPrefs";
+  // static String namePrefs = "namePrefs";
   static String timeStampPrefs = "timeStampPrefs";
 
-  static String email;
-  static String name;
+  // static String email;
+  // static String name;
   static String timeStamp;
 
   static const List<String> leavesList = <String>[
