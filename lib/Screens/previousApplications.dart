@@ -12,7 +12,7 @@ class PreviousApplications extends StatefulWidget {
 class _PreviousApplicationsState extends State<PreviousApplications> {
   Widget cardBuilder({
     @required String name,
-    @required String reason,
+    @required String type,
     @required String photoUrl,
     @required DocumentSnapshot snapshot,
   }) {
@@ -42,7 +42,7 @@ class _PreviousApplicationsState extends State<PreviousApplications> {
                 style: TextStyle(fontSize: 20.0),
               ),
               Text(
-                reason,
+                type,
                 style: TextStyle(fontSize: 20.0),
               ),
             ],
@@ -90,17 +90,29 @@ class _PreviousApplicationsState extends State<PreviousApplications> {
               );
             } else {
               int length = snapshot.data.documents.length;
-              return GridView.count(
-                crossAxisCount: 2,
-                children: List<Widget>.generate(length, (index) {
-                  return GridTile(
-                      child: cardBuilder(
-                    name: snapshot.data.documents[index].data["name"],
-                    photoUrl: snapshot.data.documents[index].data["photoUrl"],
-                    reason: snapshot.data.documents[index].data["reason"],
-                    snapshot: snapshot.data.documents[index],
-                  ));
-                }),
+              return ListView.builder(
+                itemCount: length,
+                itemBuilder: (BuildContext context, index) {
+                  return Card(
+                    child: cardBuilder(
+                      name: snapshot.data.documents[index].data["name"],
+                      photoUrl: snapshot.data.documents[index].data["photoUrl"],
+                      type: snapshot.data.documents[index].data["type"],
+                      snapshot: snapshot.data.documents[index],
+                    ),
+                  );
+                },
+                // crossAxisCount: 2,
+                // children: List<Widget>.generate(length, (index) {
+                //   return Card(
+                //     child: cardBuilder(
+                //       name: snapshot.data.documents[index].data["name"],
+                //       photoUrl: snapshot.data.documents[index].data["photoUrl"],
+                //       type: snapshot.data.documents[index].data["type"],
+                //       snapshot: snapshot.data.documents[index],
+                //     ),
+                //   );
+                // }),
               );
             }
           }
