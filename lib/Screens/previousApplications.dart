@@ -111,7 +111,7 @@ class _PreviousApplicationsState extends State<PreviousApplications> {
                                       "ChildCare")
                                   ? Colors.deepPurple[200]:
                                   (snapshot.data.documents[index].data["type"] ==
-                              "Paid Leave")
+                              "FullPaid")
                           ? Colors.green[300]
                           : (snapshot.data.documents[index].data["type"] ==
                                   "Paternity")

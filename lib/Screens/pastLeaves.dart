@@ -99,7 +99,7 @@ class _PastLeavesState extends State<PastLeaves> {
                               ? Colors.red[300]
                               : ((snapshot.data.documents[index].data["type"] == "ChildCare")
                                   ? Colors.deepPurple[200]
-                                  : (snapshot.data.documents[index].data["type"] == "Paid Leave")
+                                  : (snapshot.data.documents[index].data["type"] == "FullPaid")
                                       ? Colors.green[300]
                                       : (snapshot.data.documents[index].data["type"] == "Paternity")
                                           ? Colors.lightGreen[200]
