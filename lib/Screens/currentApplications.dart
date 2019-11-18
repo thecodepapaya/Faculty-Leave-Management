@@ -121,8 +121,26 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
                               ? Colors.red[300]
                               : ((snapshot.data.documents[index].data["type"] ==
                                       "ChildCare")
-                                  ? Colors.deepPurple[200]
-                                  : Colors.green[300]),
+                                  ? Colors.deepPurple[200]:
+                                  (snapshot.data.documents[index].data["type"] ==
+                              "Paid Leave")
+                          ? Colors.green[300]
+                          : (snapshot.data.documents[index].data["type"] ==
+                                  "Paternity")
+                              ? Colors.lightGreen[200]
+                              : ((snapshot.data.documents[index].data["type"] ==
+                                      "Vacation")
+                                  ? Colors.orange[200]:
+                                  (snapshot.data.documents[index].data["type"] ==
+                              "Lien")
+                          ? Colors.deepPurple[200]
+                          : (snapshot.data.documents[index].data["type"] ==
+                                  "Sabbatical")
+                              ? Colors.lightGreen[200]
+                              : (snapshot.data.documents[index].data["type"] ==
+                                      "Special")
+                                  ? Colors.orange[200]
+                                  : Colors.lightBlue[200])),
                     ),
                   );
                 },
