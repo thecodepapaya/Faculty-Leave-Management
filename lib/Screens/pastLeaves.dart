@@ -20,10 +20,11 @@ class _PastLeavesState extends State<PastLeaves> {
   }
 
   Widget cardBuilder(
-    String title,
+    String subject,
     String type,
     String from,
     String to,
+    bool status,
   ) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
@@ -38,7 +39,7 @@ class _PastLeavesState extends State<PastLeaves> {
             width: 450,
             child: ListTile(
               title: Text(
-                title,
+                subject,
                 style: TextStyle(fontSize: 25),
               ),
               subtitle: listDetail(type, from, to),
@@ -47,8 +48,8 @@ class _PastLeavesState extends State<PastLeaves> {
                   MaterialPageRoute(
                     builder: (BuildContext context) {
                       return LeaveDetails(
-                        title: type,
-                        reason: title,
+                        title: subject,
+                        reason: type,
                         fromDate: from,
                         toDate: to,
                       );
@@ -69,7 +70,9 @@ class _PastLeavesState extends State<PastLeaves> {
       title: "Past Leaves",
       body: FutureBuilder(
         future: Firestore.instance
-            .collection(GlobalVariables.user.email)
+            .collection("admin")
+            .where("isChecked", isEqualTo: true)
+            .where("email", isEqualTo: GlobalVariables.email)
             .getDocuments(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
@@ -84,45 +87,34 @@ class _PastLeavesState extends State<PastLeaves> {
               return Center(
                 child: Text("Error occured"),
               );
-            } else
-              return SingleChildScrollView(
-                child: Container(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-                        child: cardBuilder(
-                            "Leave due to cough and cold",
-                            "Medical Leave",
-                            "October 15 ,2019",
-                            "October 17 ,2019"),
-                      ),
-                      cardBuilder("Leave for personal reason", "Casual Leave",
-                          "September 14 ,2019", "September 17 ,2019"),
-                      cardBuilder("Vacation", "Vacation", "May 12 ,2019",
-                          "June 25 ,2019"),
-                      cardBuilder("Leave due to cough and cold", "Sick Leave",
-                          "April 15 ,2019", "April 16 ,2019"),
-                      cardBuilder("Child-care Leave", "Child Care Leave",
-                          "March 4 ,2019", "March 24 ,2019"),
-                      cardBuilder("Paternity", "Paternity Leave",
-                          "February 20 ,2019", "February 28 ,2019"),
-                      cardBuilder("Leave due to Viral Fever", "Medical Leave",
-                          "January 10 ,2019", "January 15 ,2019"),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 8),
-                        child: cardBuilder(
-                            "Leave due to personal reason",
-                            "Casual Leave",
-                            "December 20 ,2018",
-                            "December 25 , 2018"),
-                      ),
-                    ],
-                  ),
-                  // decoration: BoxDecoration(color: Colors.blue[100]),
-                  // width: MediaQuery.of(context).size.width * 1.0,
-                ),
+            } else {
+              int length = snapshot.data.documents.length;
+              return ListView.builder(
+                itemCount: length,
+                itemBuilder: (BuildContext context, index) {
+                  return Card(
+                    child: cardBuilder(
+                      snapshot.data.documents[index].data["subject"],
+                      snapshot.data.documents[index].data["type"],
+                      snapshot.data.documents[index].data["startDate"],
+                      snapshot.data.documents[index].data["endDate"],
+                      snapshot.data.documents[index].data["isGranted"],
+                    ),
+                  );
+                },
+                // crossAxisCount: 2,
+                // children: List<Widget>.generate(length, (index) {
+                //   return Card(
+                //     child: cardBuilder(
+                //       name: snapshot.data.documents[index].data["name"],
+                //       photoUrl: snapshot.data.documents[index].data["photoUrl"],
+                //       type: snapshot.data.documents[index].data["type"],
+                //       snapshot: snapshot.data.documents[index],
+                //     ),
+                //   );
+                // }),
               );
+            }
           }
         },
       ),
