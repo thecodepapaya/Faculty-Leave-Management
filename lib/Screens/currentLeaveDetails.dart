@@ -247,6 +247,15 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                   ).then((onValue) {
                     print("Leave Approved... Appedning to History");
                   });
+                  var document = await Firestore.instance
+                      .collection("${widget.snapshot.data["email"]}")
+                      .document("${widget.snapshot.data["type"]}")
+                      .get();
+                  int count = document.data["remaining"];
+                  await Firestore.instance
+                      .collection("${widget.snapshot.data["email"]}")
+                      .document("${widget.snapshot.data["type"]}")
+                      .setData({"remaining": count - 1}, merge: true);
                   await Firestore.instance
                       .collection("${widget.snapshot.data["email"]}")
                       .document("${widget.snapshot.data["type"]}")
@@ -266,6 +275,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                     "photoUrl": widget.snapshot.data["photoUrl"],
                   }).then((onValue) {
                     print("Added data to history");
+                    Navigator.of(context).pop();
                   });
                 },
                 color: Colors.green,
@@ -294,6 +304,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                     merge: true,
                   ).then((onValue) {
                     print("Leave NOT Approved");
+                    Navigator.of(context).pop();
                   });
                 },
                 color: Colors.red,

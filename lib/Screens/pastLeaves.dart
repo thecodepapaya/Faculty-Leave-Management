@@ -38,7 +38,18 @@ class _PastLeavesState extends State<PastLeaves> {
                 subject,
                 style: TextStyle(fontSize: 25),
               ),
-              subtitle: listDetail(type, from, to),
+              subtitle: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  listDetail(type, from, to),
+
+                  Padding(padding: EdgeInsets.all(8),),
+                  snapshot.data["isGranted"]
+                      ? Text("Approved",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green[800]),)
+                      : Text("Disapproved",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.red[800]),),
+                ],
+              ),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -64,8 +75,8 @@ class _PastLeavesState extends State<PastLeaves> {
       body: FutureBuilder<QuerySnapshot>(
         future: Firestore.instance
             .collection("admin")
+            .where("email", isEqualTo: GlobalVariables.user.email)
             .where("isChecked", isEqualTo: true)
-            .where("email", isEqualTo: GlobalVariables.email)
             .getDocuments(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
@@ -81,6 +92,7 @@ class _PastLeavesState extends State<PastLeaves> {
                 child: Text("Error occured: ${snapshot.error}"),
               );
             } else {
+              // print(snapshot.data.documents.first.data);
               int length = snapshot.data.documents.length;
               return ListView.builder(
                 itemCount: length,
