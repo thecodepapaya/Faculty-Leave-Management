@@ -22,6 +22,7 @@ class _PastLeavesState extends State<PastLeaves> {
   Widget cardBuilder(
       String subject, String type, String from, String to, bool status,
       {Color clr}) {
+
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Card(
@@ -35,20 +36,21 @@ class _PastLeavesState extends State<PastLeaves> {
             width: 450,
             child: ListTile(
               title: Text(
-                subject,
+                snapshot.data["subject"],
                 style: TextStyle(fontSize: 25),
               ),
-              subtitle: listDetail(type, from, to),
+              subtitle: listDetail(snapshot.data["type"],
+                  snapshot.data["startDate"], snapshot.data["endDate"]),
               onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (BuildContext context) {
-                //       return LeaveDetails(
-                //         snapshot: snapshot,
-                //       );
-                //     },
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return LeaveDetails(
+                        snapshot: snapshot,
+                      );
+                    },
+                  ),
+                );
               },
             ),
           ),
@@ -61,13 +63,13 @@ class _PastLeavesState extends State<PastLeaves> {
   Widget build(BuildContext context) {
     return LeaveScaffold(
       title: "Past Leaves",
-      body: FutureBuilder(
+      body: FutureBuilder<QuerySnapshot>(
         future: Firestore.instance
             .collection("admin")
             .where("isChecked", isEqualTo: true)
             .where("email", isEqualTo: GlobalVariables.email)
             .getDocuments(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
               snapshot.connectionState == ConnectionState.none) {
             return Center(
@@ -78,7 +80,7 @@ class _PastLeavesState extends State<PastLeaves> {
           } else {
             if (snapshot.hasError) {
               return Center(
-                child: Text("Error occured"),
+                child: Text("Error occured: ${snapshot.error}"),
               );
             } else {
               int length = snapshot.data.documents.length;
