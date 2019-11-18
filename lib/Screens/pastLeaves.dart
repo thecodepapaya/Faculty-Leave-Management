@@ -38,7 +38,16 @@ class _PastLeavesState extends State<PastLeaves> {
                 subject,
                 style: TextStyle(fontSize: 25),
               ),
-              subtitle: listDetail(type, from, to),
+              subtitle: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  listDetail(type, from, to),
+                  snapshot.data["isGranted"]
+                      ? Text("Approved")
+                      : Text("Disapproved"),
+                ],
+              ),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
