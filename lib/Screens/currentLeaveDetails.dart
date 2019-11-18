@@ -266,6 +266,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                     "photoUrl": widget.snapshot.data["photoUrl"],
                   }).then((onValue) {
                     print("Added data to history");
+                    Navigator.of(context).pop();
                   });
                 },
                 color: Colors.green,
@@ -294,6 +295,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                     merge: true,
                   ).then((onValue) {
                     print("Leave NOT Approved");
+                    Navigator.of(context).pop();
                   });
                 },
                 color: Colors.red,
