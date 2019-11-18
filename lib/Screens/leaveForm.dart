@@ -83,10 +83,7 @@ class _LeaveFormState extends State<LeaveForm> {
                       if (document.data["remaining"] == 0) {
                         print("No Leave left");
                       } else {
-                        await Firestore.instance
-                            .collection("${GlobalVariables.user.email}")
-                            .document("$_leaveType")
-                            .setData({"remaining": count - 1}, merge: true);
+                        
                         String epochTime =
                             DateTime.now().millisecondsSinceEpoch.toString();
                         await Firestore.instance
