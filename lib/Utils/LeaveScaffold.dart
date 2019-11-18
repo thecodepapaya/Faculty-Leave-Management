@@ -25,29 +25,29 @@ class _LeaveScaffoldState extends State<LeaveScaffold> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        actions: <Widget>[
-          FlatButton(
-            child: Icon(Icons.exit_to_app),
-            onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-              await GoogleSignIn().signOut();
-            },
-          ),
-          FlatButton(
-            child: Icon(Icons.home),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return AdminDashboard(
-                      user: GlobalVariables.user,
-                    );
-                  },
-                ),
-              );
-            },
-          ),
-        ],
+        // actions: <Widget>[
+        //   FlatButton(
+        //     child: Icon(Icons.exit_to_app),
+        //     onPressed: () async {
+        //       await FirebaseAuth.instance.signOut();
+        //       await GoogleSignIn().signOut();
+        //     },
+        //   ),
+        //   FlatButton(
+        //     child: Icon(Icons.home),
+        //     onPressed: () {
+        //       Navigator.of(context).push(
+        //         MaterialPageRoute(
+        //           builder: (BuildContext context) {
+        //             return AdminDashboard(
+        //               user: GlobalVariables.user,
+        //             );
+        //           },
+        //         ),
+        //       );
+        //     },
+        //   ),
+        // ],
       ),
       body: widget.body,
       floatingActionButton: widget.floatingButton,

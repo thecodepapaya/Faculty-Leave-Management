@@ -36,21 +36,20 @@ class _PastLeavesState extends State<PastLeaves> {
             width: 450,
             child: ListTile(
               title: Text(
-                snapshot.data["subject"],
+                subject,
                 style: TextStyle(fontSize: 25),
               ),
-              subtitle: listDetail(snapshot.data["type"],
-                  snapshot.data["startDate"], snapshot.data["endDate"]),
+              subtitle: listDetail(type,from,to),
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return LeaveDetails(
-                        snapshot: snapshot,
-                      );
-                    },
-                  ),
-                );
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (BuildContext context) {
+                //       return LeaveDetails(
+                //         snapshot: snapshot,
+                //       );
+                //     },
+                //   ),
+                // );
               },
             ),
           ),
@@ -104,7 +103,7 @@ class _PastLeavesState extends State<PastLeaves> {
                                       "ChildCare")
                                   ? Colors.deepPurple[200]:
                                   (snapshot.data.documents[index].data["type"] ==
-                              "Paid Leave")
+                              "FullPaid")
                           ? Colors.green[300]
                           : (snapshot.data.documents[index].data["type"] ==
                                   "Paternity")

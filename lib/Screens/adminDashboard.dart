@@ -60,7 +60,7 @@ class _AdminDashboardState extends State<AdminDashboard>
     return !widget.user.email.endsWith("@iiitvadodara.ac.in")
         ? notAllowedScreen()
         : LeaveScaffold(
-            title: "Home page",
+            title: "Admin Home page",
             body: Stack(
               children: <Widget>[
                 ClipRRect(
