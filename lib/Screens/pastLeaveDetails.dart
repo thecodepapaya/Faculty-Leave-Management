@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:pdf/widgets.dart' as leavePdf;
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 
 class PastLeaveDetails extends StatefulWidget {
+  final DocumentSnapshot snapshot;
+  PastLeaveDetails({@required this.snapshot});
   @override
   _PastLeaveDetailsState createState() => _PastLeaveDetailsState();
 }
@@ -49,7 +53,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                   padding:
                       const leavePdf.EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
                   child: leavePdf.Text(
-                    "Type: Medical Leave",
+                    "Type: ${widget.snapshot.data["type"]}",
                     style: leavePdf.TextStyle(fontSize: 20),
                   ),
                 ),
@@ -61,7 +65,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "From: Ashish Phophalia",
+                        "From: ${widget.snapshot.data["name"]}",
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
@@ -77,7 +81,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "Date: 21/22/23",
+                        "Date: ${DateFormat("dd-MMM-yyyy").format(DateTime.fromMillisecondsSinceEpoch(int.parse(widget.snapshot.data["epochTime"])))}",
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
@@ -85,7 +89,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "Subject: Leave for Cold",
+                        "Subject: ${widget.snapshot.data["subject"]}",
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
@@ -93,10 +97,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "I want Leave djbasdkv vbnadbd vadn cas kas ckas as c asc as cas"
-                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac "
-                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac "
-                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac ",
+                        "${widget.snapshot.data["reason"]}",
                         textAlign: leavePdf.TextAlign.justify,
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
@@ -105,7 +106,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "From 1/2/3",
+                        "From ${widget.snapshot.data["startDate"]}",
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
@@ -113,7 +114,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "To 4/5/6",
+                        "To ${widget.snapshot.data["endDate"]}",
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
@@ -141,30 +142,6 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
         },
       ),
     );
-
-    // doc.addPage(
-    //   leavePdf.Page(
-    //     pageFormat: format,
-    //     build: (pdf.Context context) {
-    //       return pdf.ConstrainedBox(
-    //         constraints: const pdf.BoxConstraints.expand(),
-    //         child: pdf.FittedBox(
-    //           child: pdf.Text(
-    //             'Hello World',
-    //           ),
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
-
-    // final leavePdf.Document pdf = leavePdf.Document();
-    // final Directory output = await getApplicationDocumentsDirectory();
-    // final File file = File("${output.path}/leave.pdf");
-    // // final file = File("example.pdf");
-    // await file.writeAsBytes(pdf.save());
-    // print("File saved at :${output.path}/leave.pdf");
-
     return doc.save();
   }
 
@@ -176,7 +153,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
           alignment: Alignment.center,
           padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
           child: Text(
-            "Type: Medical Leave",
+            "Type: ${widget.snapshot.data["type"]}",
             style: TextStyle(fontSize: 20),
           ),
         ),
@@ -187,7 +164,7 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "From: Ashish Phophalia",
+                "From: ${widget.snapshot.data["name"]}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
@@ -201,27 +178,21 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "Date: 21/22/23",
+                "Date: ${DateFormat("dd-MMM-yyyy").format(DateTime.fromMillisecondsSinceEpoch(int.parse(widget.snapshot.data["epochTime"])))}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "Subject: Leave for Cold",
+                "Subject: ${widget.snapshot.data["subject"]}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "I want Leave djbasdkv vbnadbd vadn cas kas ckas as c asc as cas"
-                " cas cas c ashc ash chas cas cka ca cas cnas cksa"
-                " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac "
-                "asnkc askc asnk casnc ask casnkc asnk nc anks casnkc nkas cnkas cnkas cnas cnkas cnas "
-                "cnkas c asnkc asnk ckasnc asnkc asnk casnkc asnkc asnkc ank ankc ankc asnkc asnk casnk "
-                "casnkc nkas cnkas casnk cnas cnasc asnkc asnkc nas c askc asnc kasc "
-                "asnk casnk casn cnkas cnkas cnkas c",
+                "${widget.snapshot.data["reason"]}",
                 textAlign: TextAlign.justify,
                 style: TextStyle(fontSize: 15),
               ),
@@ -229,14 +200,14 @@ class _PastLeaveDetailsState extends State<PastLeaveDetails> {
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "From 1/2/3",
+                "From ${widget.snapshot.data["startDate"]}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "To 4/5/6",
+                "To ${widget.snapshot.data["endDate"]}",
                 style: TextStyle(fontSize: 15),
               ),
             ),

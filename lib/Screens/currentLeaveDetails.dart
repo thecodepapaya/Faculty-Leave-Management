@@ -51,7 +51,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                   padding:
                       const leavePdf.EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
                   child: leavePdf.Text(
-                    "Type: Medical Leave",
+                    "Type: ${widget.snapshot.data["type"]}",
                     style: leavePdf.TextStyle(fontSize: 20),
                   ),
                 ),
@@ -63,7 +63,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "From: Ashish Phophalia",
+                        "From: ${widget.snapshot.data["name"]}",
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
@@ -79,7 +79,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "Date: 21/22/23",
+                        "Date: ${DateFormat("dd-MMM-yyyy").format(DateTime.fromMillisecondsSinceEpoch(int.parse(widget.snapshot.data["epochTime"])))}",
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
@@ -87,7 +87,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "Subject: Leave for Cold",
+                        "Subject: ${widget.snapshot.data["subject"]}",
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
@@ -95,10 +95,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "I want Leave djbasdkv vbnadbd vadn cas kas ckas as c asc as cas"
-                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac "
-                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac "
-                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac ",
+                        "${widget.snapshot.data["reason"]}",
                         textAlign: leavePdf.TextAlign.justify,
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
@@ -107,7 +104,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "From 1/2/3",
+                        "From ${widget.snapshot.data["startDate"]}",
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
@@ -115,7 +112,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                       padding: const leavePdf.EdgeInsets.fromLTRB(
                           18.0, 10, 18.0, 10),
                       child: leavePdf.Text(
-                        "To 4/5/6",
+                        "To ${widget.snapshot.data["endDate"]}",
                         style: leavePdf.TextStyle(fontSize: 11),
                       ),
                     ),
