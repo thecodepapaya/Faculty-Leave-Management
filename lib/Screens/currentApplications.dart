@@ -9,7 +9,7 @@ class CurrentApplications extends StatefulWidget {
 }
 
 class _CurrentApplicationsState extends State<CurrentApplications> {
-  Widget cardBuilder(String name, String reason) {
+  Widget cardBuilder(String name, String type) {
     return Card(
       margin: EdgeInsets.all(10),
       elevation: 12,
@@ -19,29 +19,31 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
       child: InkWell(
         child: Container(
           padding: const EdgeInsets.all(3),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CircleAvatar(
-                  maxRadius: MediaQuery.of(context).size.height * 0.05,
-                  backgroundImage: AssetImage(
-                    "assets/images/image.png",
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    maxRadius: MediaQuery.of(context).size.height * 0.05,
+                    backgroundImage: AssetImage(
+                      "assets/images/image.png",
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                name,
-                style: TextStyle(fontSize: 20.0),
-              ),
-              Text(
-                reason,
-                style: TextStyle(fontSize: 20.0),
-              ),
-            ],
+                Text(
+                  name,
+                  style: TextStyle(fontSize: 20.0),
+                ),
+                Text(
+                  type,
+                  style: TextStyle(fontSize: 20.0),
+                ),
+              ],
+            ),
           ),
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: MediaQuery.of(context).size.height * 0.8,
           width: MediaQuery.of(context).size.width * 0.4,
         ),
         onTap: () {
@@ -65,7 +67,7 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
       body: GridView.count(
         crossAxisCount: 2,
         children: List<Widget>.generate(16, (index) {
-          return GridTile(child: cardBuilder("name", "reason"));
+          return GridTile(child: cardBuilder("name", "Type of Leave"));
         }),
       ),
     );
