@@ -25,6 +25,8 @@ class _PastLeavesState extends State<PastLeaves> {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Card(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         color: HouseKeeping.randomColor(density: 100),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -54,8 +56,6 @@ class _PastLeavesState extends State<PastLeaves> {
             ),
           ),
         ),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
     );
   }

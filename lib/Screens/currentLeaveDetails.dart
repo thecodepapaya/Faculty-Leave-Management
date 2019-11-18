@@ -1,7 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
+import 'package:pdf/widgets.dart' as leavePdf;
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
 
 class CurrentLeaveDetails extends StatefulWidget {
+  final DocumentSnapshot snapshot;
+  CurrentLeaveDetails({@required this.snapshot});
   @override
   _CurrentLeaveDetailsState createState() => _CurrentLeaveDetailsState();
 }
@@ -11,120 +18,242 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
   Widget build(BuildContext context) {
     return LeaveScaffold(
       title: "Leave Details",
-      body: SingleChildScrollView(
-        child: Column(
+      body: SingleChildScrollView(child: leaveDetails()),
+      floatingButton: FloatingActionButton(
+        child: Icon(Icons.file_download),
+        onPressed: () async {
+          Printing.layoutPdf(
+            onLayout: buildPdf,
+          );
+          // Directory appDocDir = await getApplicationDocumentsDirectory();
+          // String appDocPath = appDocDir.path;
+        },
+      ),
+    );
+  }
+
+  List<int> buildPdf(PdfPageFormat format) {
+    leavePdf.Document doc = leavePdf.Document();
+
+    doc.addPage(
+      leavePdf.Page(
+        pageFormat: format,
+        clip: false,
+        build: (leavePdf.Context context) {
+          return leavePdf.Expanded(
+            // constraints: leavePdf.BoxConstraints.expand(),
+            // child: leavePdf.FittedBox(
+            child: leavePdf.Column(
+              crossAxisAlignment: leavePdf.CrossAxisAlignment.start,
+              children: <leavePdf.Widget>[
+                leavePdf.Container(
+                  alignment: leavePdf.Alignment.center,
+                  padding:
+                      const leavePdf.EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+                  child: leavePdf.Text(
+                    "Type: Medical Leave",
+                    style: leavePdf.TextStyle(fontSize: 20),
+                  ),
+                ),
+                leavePdf.Column(
+                  crossAxisAlignment: leavePdf.CrossAxisAlignment.start,
+                  mainAxisAlignment: leavePdf.MainAxisAlignment.start,
+                  children: <leavePdf.Widget>[
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "From: Ashish Phophalia",
+                        style: leavePdf.TextStyle(fontSize: 11),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "To: Director",
+                        style: leavePdf.TextStyle(fontSize: 11),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "Date: 21/22/23",
+                        style: leavePdf.TextStyle(fontSize: 11),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "Subject: Leave for Cold",
+                        style: leavePdf.TextStyle(fontSize: 11),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "I want Leave djbasdkv vbnadbd vadn cas kas ckas as c asc as cas"
+                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac "
+                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac "
+                        " ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac ",
+                        textAlign: leavePdf.TextAlign.justify,
+                        style: leavePdf.TextStyle(fontSize: 11),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "From 1/2/3",
+                        style: leavePdf.TextStyle(fontSize: 11),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.fromLTRB(
+                          18.0, 10, 18.0, 10),
+                      child: leavePdf.Text(
+                        "To 4/5/6",
+                        style: leavePdf.TextStyle(fontSize: 11),
+                      ),
+                    ),
+                    leavePdf.Padding(
+                      padding: const leavePdf.EdgeInsets.only(
+                          left: 18.0, bottom: 10),
+                      child: leavePdf.Container(
+                        // decoration:
+                        // leavePdf.BoxDecoration(border: Border.all(style: BorderStyle.solid)),
+                        padding: const leavePdf.EdgeInsets.fromLTRB(
+                            18.0, 10, 18.0, 10),
+                        child: leavePdf.Text(
+                          "Sign of Applicant",
+                          style: leavePdf.TextStyle(
+                              color: PdfColors.black, fontSize: 11),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            // ),
+          );
+        },
+      ),
+    );
+    return doc.save();
+  }
+
+  Widget leaveDetails() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+          child: Text(
+            "Type: ${widget.snapshot.data["type"]}",
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Container(
-              alignment: Alignment.center,
+            Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "Type: Medical Leave",
-                style: TextStyle(fontSize: 20),
+                "From: ${widget.snapshot.data["name"]}",
+                style: TextStyle(fontSize: 15),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "From: Ashish Phophalia",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "To: Director",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "Date: 21/22/23",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "Subject: Leave for Cold",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "I want Leave djbasdkv vbnadbd vadn cas kas ckas as c asc as cas cas cas c ashc ash chas cas cka ca cas cnas cksa ckas cjkas c asc as ckas cas c asnc asn cnas cas nc asnc asnk cnkas cas nkc asnc nac asnkc askc asnk casnc ask casnkc asnk nc anks casnkc nkas cnkas cnkas cnas cnkas cnas cnkas c asnkc asnk ckasnc asnkc asnk casnkc asnkc asnkc ank ankc ankc asnkc asnk casnk casnkc nkas cnkas casnk cnas cnasc asnkc asnkc nas c askc asnc kasc asnk casnk casn cnkas cnkas cnkas c",
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "From 1/2/3",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                  child: Text(
-                    "To 4/5/6",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 18.0, bottom: 10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(style: BorderStyle.solid)),
-                    padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
-                    child: Text(
-                      "Sign of Applicant",
-                      style: TextStyle(color: Colors.black38, fontSize: 15),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Container(
-                  width: 120,
-                  child: FlatButton(
-                    child: Text("Approve"),
-                    onPressed: () {},
-                    color: Colors.green,
-                  ),
-                ),
-                Container(
-                  width: 120,
-                  child: FlatButton(
-                    child: Text("Disapprove"),
-                    onPressed: () {},
-                    color: Colors.red,
-                  ),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "To: Director",
+                style: TextStyle(fontSize: 15),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "Date: ${DateTime.fromMillisecondsSinceEpoch(int.parse(widget.snapshot.data["epochTime"]))}",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "Subject: ${widget.snapshot.data["subject"]}",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "${widget.snapshot.data["reason"]}",
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "From: ${widget.snapshot.data["startDate"]}",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+              child: Text(
+                "To: ${widget.snapshot.data["startDate"]}",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0, bottom: 10),
+              child: Container(
+                decoration:
+                    BoxDecoration(border: Border.all(style: BorderStyle.solid)),
+                padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
+                child: Text(
+                  "Sign of Applicant",
+                  style: TextStyle(color: Colors.black38, fontSize: 15),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
             ),
           ],
         ),
-      ),
-      floatingButton: FloatingActionButton(
-        child: Icon(Icons.file_download),
-        onPressed: () {},
-      ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Container(
+              width: 120,
+              child: FlatButton(
+                child: Text("Approve"),
+                onPressed: () {},
+                color: Colors.green,
+              ),
+            ),
+            Container(
+              width: 120,
+              child: FlatButton(
+                child: Text("Disapprove"),
+                onPressed: () {},
+                color: Colors.red,
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20),
+        ),
+      ],
     );
   }
 }
