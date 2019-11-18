@@ -3,6 +3,7 @@ import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:leave_management/Utils/GlobalVariables.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RemainingLeaves extends StatefulWidget {
   @override
@@ -10,18 +11,19 @@ class RemainingLeaves extends StatefulWidget {
 }
 
 class _RemainingLeavesState extends State<RemainingLeaves> {
-  Widget get image1 {
+  Widget image1(Icon icn) {
     return Container(
       width: 70.0,
       height: 70.0,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage('assets/images/image.png'),
-        ),
-      ),
+      child: CircleAvatar(child: icn),
     );
+    // decoration: BoxDecoration(
+    //   shape: BoxShape.circle,
+
+    //   image: DecorationImage(
+    //     fit: BoxFit.cover,
+    //     image: AssetImage(),
+    //   ),
   }
 
   Widget detailsCard(String title, Color dikh, int tot, int rem) {
@@ -102,7 +104,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot.data.documents[5].data["total"],
                                   snapshot.data.documents[5].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child: new Icon(FontAwesomeIcons.medkit)),
                           ],
                         ),
                       ),
@@ -122,7 +126,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot.data.documents[0].data["total"],
                                   snapshot.data.documents[0].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child: new Icon(FontAwesomeIcons.userTie)),
                           ],
                         ),
                       ),
@@ -142,7 +148,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot.data.documents[6].data["total"],
                                   snapshot.data.documents[6].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child: new Icon(FontAwesomeIcons.moneyBill)),
                           ],
                         ),
                       ),
@@ -162,7 +170,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot.data.documents[1].data["total"],
                                   snapshot.data.documents[1].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child: new Icon(FontAwesomeIcons.child)),
                           ],
                         ),
                       ),
@@ -182,7 +192,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot.data.documents[7].data["total"],
                                   snapshot.data.documents[7].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child: new Icon(FontAwesomeIcons.male)),
                           ],
                         ),
                       ),
@@ -203,7 +215,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot
                                       .data.documents[10].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child: new Icon(FontAwesomeIcons.userTie)),
                           ],
                         ),
                       ),
@@ -224,7 +238,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot
                                       .data.documents[11].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child: new Icon(FontAwesomeIcons.cannabis)),
                           ],
                         ),
                       ),
@@ -244,7 +260,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot.data.documents[2].data["total"],
                                   snapshot.data.documents[2].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child:
+                                    new Icon(FontAwesomeIcons.chargingStation)),
                           ],
                         ),
                       ),
@@ -264,7 +283,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot.data.documents[3].data["total"],
                                   snapshot.data.documents[3].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child: new Icon(FontAwesomeIcons.angry)),
                           ],
                         ),
                       ),
@@ -284,7 +305,10 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot.data.documents[4].data["total"],
                                   snapshot.data.documents[4].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child:
+                                    new Icon(FontAwesomeIcons.planeDeparture)),
                           ],
                         ),
                       ),
@@ -304,7 +328,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot.data.documents[9].data["total"],
                                   snapshot.data.documents[9].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child: new Icon(FontAwesomeIcons.award)),
                           ],
                         ),
                       ),
@@ -325,7 +351,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                                   snapshot
                                       .data.documents[10].data["remaining"]),
                             ),
-                            Positioned(top: 16.5, child: image1),
+                            Positioned(
+                                top: 27.5,
+                                child: new Icon(FontAwesomeIcons.stripeS)),
                           ],
                         ),
                       ),
