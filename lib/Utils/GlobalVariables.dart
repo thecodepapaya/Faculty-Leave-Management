@@ -15,18 +15,18 @@ class GlobalVariables {
   static String name;
   static String timeStamp;
 
-  static const String casualLeave = 'Casual Leave';
-  static const String childCare = 'Child Care Leave';
-  static const String maternity = 'Maternity Leave';
-  static const String medical = 'Medical Leave';
-  static const String paternity = 'Paternity Leave';
-  static const String halfPaid = 'Half Paid Leave';
-  static const String fullPaid = 'Full Paid Leave';
-  static const String specialCasual = 'Special Casual Leave';
-  static const String vacation = 'Vacation Leave';
-  static const String extraOrdinary = 'Extra Ordinary Leave';
-  static const String leaveNotDue = 'Leave Not Due';
-  static const String lien = 'Lien Leave';
-  static const String sabbatical = 'Sabbatical Leave';
-  static const String special = 'Special Leave';
+  static const String casualLeave = "Casual";
+  static const String childCare = "ChildCare";
+  static const String maternity = "Maternity";
+  static const String medical = "Medical";
+  static const String paternity = "Paternity";
+  static const String halfPaid = "HalfPaid";
+  static const String fullPaid = "FullPaid";
+  static const String specialCasual = "SpecialCasual";
+  static const String vacation = "Vacation";
+  static const String extraOrdinary = "ExtraOrdinary";
+  static const String leaveNotDue = "LeaveNotDue";
+  static const String lien = "Lien";
+  static const String sabbatical = "Sabbatical";
+  static const String special = "Special";
 }
