@@ -247,6 +247,15 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                   ).then((onValue) {
                     print("Leave Approved... Appedning to History");
                   });
+                  var document = await Firestore.instance
+                      .collection("${widget.snapshot.data["email"]}")
+                      .document("${widget.snapshot.data["type"]}")
+                      .get();
+                  int count = document.data["remaining"];
+                  await Firestore.instance
+                      .collection("${widget.snapshot.data["email"]}")
+                      .document("${widget.snapshot.data["type"]}")
+                      .setData({"remaining": count - 1}, merge: true);
                   await Firestore.instance
                       .collection("${widget.snapshot.data["email"]}")
                       .document("${widget.snapshot.data["type"]}")
