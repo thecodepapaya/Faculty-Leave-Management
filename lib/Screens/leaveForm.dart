@@ -16,20 +16,20 @@ class _LeaveFormState extends State<LeaveForm> {
   String _leaveType = ' ';
   List<String> _leavesList = <String>[
     ' ',
-    GlobalVariables.casualLeave,
-    GlobalVariables.childCare,
-    GlobalVariables.maternity,
-    GlobalVariables.medical,
-    GlobalVariables.paternity,
-    GlobalVariables.halfPaid,
-    GlobalVariables.fullPaid,
-    GlobalVariables.specialCasual,
-    GlobalVariables.vacation,
-    GlobalVariables.extraOrdinary,
-    GlobalVariables.leaveNotDue,
-    GlobalVariables.lien,
-    GlobalVariables.sabbatical,
-    GlobalVariables.special,
+    'Casual',
+    'ChildCare',
+    'Maternity',
+    'Medical',
+    'Paternity',
+    'HalfPaid',
+    'FullPaid',
+    'SpecialCasual',
+    'Vacation',
+    'ExtraOrdinary',
+    'LeaveNotDue',
+    'Lien',
+    'Sabbatical',
+    'Special'
   ];
 
   TextEditingController _reasonController = TextEditingController();
@@ -67,28 +67,45 @@ class _LeaveFormState extends State<LeaveForm> {
                   FlatButton(
                     textColor: Colors.blue,
                     onPressed: () async {
-                      String epochTime =
-                          DateTime.now().millisecondsSinceEpoch.toString();
-                      await Firestore.instance
-                          .collection("admin")
-                          .document(
-                              "${GlobalVariables.user.email} " + epochTime)
-                          .setData({
-                        "reason": _reasonController.text,
-                        "subject": _subjectController.text,
-                        "startDate": _startDateController.text,
-                        "endDate": _endDateController.text,
-                        "name": GlobalVariables.user.displayName,
-                        "type": _leaveType,
-                        "isChecked": false,
-                        "isGranted": false,
-                        "epochTime": epochTime,
-                        "email": GlobalVariables.user.email,
-                        "photoUrl": GlobalVariables.user.phoneNumber,
-                      }).then((onValue) {
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                      });
+                      var document = await Firestore.instance
+                          .collection("${GlobalVariables.user.email}")
+                          .document("$_leaveType")
+                          .get();
+                      print("=============================");
+                      print("${GlobalVariables.user.email}");
+                      print("$_leaveType");
+                      print(document.data);
+                      int count = document.data["remaining"];
+                      if (document.data["remaining"] == 0) {
+                        print("No Leave left");
+                      } else {
+                        await Firestore.instance
+                            .collection("${GlobalVariables.user.email}")
+                            .document("$_leaveType")
+                            .setData({"remaining": count - 1}, merge: true);
+                        String epochTime =
+                            DateTime.now().millisecondsSinceEpoch.toString();
+                        await Firestore.instance
+                            .collection("admin")
+                            .document(
+                                "${GlobalVariables.user.email} " + epochTime)
+                            .setData({
+                          "reason": _reasonController.text,
+                          "subject": _subjectController.text,
+                          "startDate": _startDateController.text,
+                          "endDate": _endDateController.text,
+                          "name": GlobalVariables.user.displayName,
+                          "type": _leaveType,
+                          "isChecked": false,
+                          "isGranted": false,
+                          "epochTime": epochTime,
+                          "email": GlobalVariables.user.email,
+                          "photoUrl": GlobalVariables.user.phoneNumber,
+                        }).then((onValue) {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        });
+                      }
                     },
                     child: Text(
                       "Proceed",
