@@ -35,13 +35,13 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
       height: 100.0,
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         color: dikh,
         child: Padding(
           padding: const EdgeInsets.only(
-            top: 8.0,
-            bottom: 8.0,
+            top: 5.0,
+            bottom: 5.0,
             left: 64.0,
           ),
           child: Column(
@@ -91,7 +91,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
+                          horizontal: 19.0, vertical: 5.0),
                       child: Container(
                         height: 115,
                         child: Stack(
@@ -135,7 +135,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
+                          horizontal: 19.0, vertical: 5.0),
                       child: Container(
                         height: 115,
                         child: Stack(
@@ -157,7 +157,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
+                          horizontal: 19.0, vertical: 5.0),
                       child: Container(
                         height: 115,
                         child: Stack(
@@ -179,7 +179,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
+                          horizontal: 19.0, vertical: 5.0),
                       child: Container(
                         height: 115,
                         child: Stack(
@@ -201,7 +201,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
+                          horizontal: 19.0, vertical: 5.0),
                       child: Container(
                         height: 115,
                         child: Stack(
@@ -224,7 +224,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
+                          horizontal: 19.0, vertical: 5.0),
                       child: Container(
                         height: 115,
                         child: Stack(
@@ -247,7 +247,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
+                          horizontal: 19.0, vertical: 5.0),
                       child: Container(
                         height: 115,
                         child: Stack(
@@ -270,7 +270,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
+                          horizontal: 19.0, vertical: 5.0),
                       child: Container(
                         height: 115,
                         child: Stack(
@@ -292,7 +292,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
+                          horizontal: 19.0, vertical: 5.0),
                       child: Container(
                         height: 115,
                         child: Stack(
@@ -315,7 +315,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
+                          horizontal: 19.0, vertical: 5.0),
                       child: Container(
                         height: 115,
                         child: Stack(
@@ -338,7 +338,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 19.0, vertical: 8.0),
+                          horizontal: 19.0, vertical: 5.0),
                       child: Container(
                         height: 115,
                         child: Stack(

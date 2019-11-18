@@ -43,9 +43,11 @@ class _PastLeavesState extends State<PastLeaves> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   listDetail(type, from, to),
+
+                  Padding(padding: EdgeInsets.all(8),),
                   snapshot.data["isGranted"]
-                      ? Text("Approved")
-                      : Text("Disapproved"),
+                      ? Text("Approved",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.green[800]),)
+                      : Text("Disapproved",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.red[800]),),
                 ],
               ),
               onTap: () {
