@@ -1,10 +1,12 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:intl/intl.dart';
 import 'package:leave_management/Utils/GlobalVariables.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:leave_management/Utils/houseKeeping.dart';
 
 class LeaveForm extends StatefulWidget {
   @override
@@ -72,6 +74,15 @@ class _LeaveFormState extends State<LeaveForm> {
                       ),
                       textColor: Colors.blue,
                       onPressed: () async {
+                        int duaration = HouseKeeping.convertToDateTime(
+                                _endDateController.text)
+                            .difference(HouseKeeping.convertToDateTime(
+                                _startDateController.text))
+                            .inDays;
+
+                        String epochTime =
+                            DateTime.now().millisecondsSinceEpoch.toString();
+
                         var document = await Firestore.instance
                             .collection("${GlobalVariables.user.email}")
                             .document("$_leaveType")
@@ -83,13 +94,37 @@ class _LeaveFormState extends State<LeaveForm> {
                         int count = document.data["remaining"];
                         if (document.data["remaining"] == 0) {
                           print("No Leave left");
+                          Navigator.of(context).pop();
+                          // Fluttertoast.showToast(
+                          //     msg: "This is Center Short Toast",
+                          //     toastLength: Toast.LENGTH_SHORT,
+                          //     gravity: ToastGravity.CENTER,
+                          //     timeInSecForIos: 1,
+                          //     backgroundColor: Colors.red,
+                          //     textColor: Colors.white,
+                          //     fontSize: 16.0);
+                        } else if (count - duaration < 0) {
+                          print("Insufficient Leaves");
+                          Navigator.of(context).pop();
+                          // Fluttertoast.showToast(
+                          //     msg: "This is Center Short Toast",
+                          //     toastLength: Toast.LENGTH_SHORT,
+                          //     gravity: ToastGravity.CENTER,
+                          //     timeInSecForIos: 1,
+                          //     backgroundColor: Colors.red,
+                          //     textColor: Colors.white,
+                          //     fontSize: 16.0);
                         } else {
                           await Firestore.instance
                               .collection("${GlobalVariables.user.email}")
                               .document("$_leaveType")
-                              .setData({"remaining": count - 1}, merge: true);
-                          String epochTime =
-                              DateTime.now().millisecondsSinceEpoch.toString();
+                              .setData(
+                            {
+                              "remaining": count - duaration,
+                            },
+                            merge: true,
+                          );
+
                           await Firestore.instance
                               .collection("admin")
                               .document(
@@ -106,6 +141,7 @@ class _LeaveFormState extends State<LeaveForm> {
                             "epochTime": epochTime,
                             "email": GlobalVariables.user.email,
                             "photoUrl": GlobalVariables.user.photoUrl,
+                            "duration": duaration,
                           }).then((onValue) {
                             Navigator.pop(context);
                             Navigator.pop(context);
