@@ -1,60 +1,69 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:leave_management/Screens/leaveDetails.dart';
-import 'package:leave_management/Utils/GlobalVariables.dart';
+import 'package:leave_management/Screens/pastLeaveDetails.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
-import 'package:leave_management/Utils/houseKeeping.dart';
 
-class PastLeaves extends StatefulWidget {
+class PreviousApplications extends StatefulWidget {
   @override
-  _PastLeavesState createState() => _PastLeavesState();
+  _PreviousApplicationsState createState() => _PreviousApplicationsState();
 }
 
-class _PastLeavesState extends State<PastLeaves> {
-  Widget listDetail(String type, String from, String to) {
-    return Text(
-      type + "\n" + "From :" + from + "\n" + "To :" + to,
-      style: TextStyle(fontSize: 15),
-    );
-  }
-
-  Widget cardBuilder(
-      String subject, String type, String from, String to, bool status,
-      {Color clr}) {
-
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Card(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        color: clr,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            height: 130,
-            width: 450,
-            child: ListTile(
-              title: Text(
-                snapshot.data["subject"],
-                style: TextStyle(fontSize: 25),
-              ),
-              subtitle: listDetail(snapshot.data["type"],
-                  snapshot.data["startDate"], snapshot.data["endDate"]),
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return LeaveDetails(
-                        snapshot: snapshot,
-                      );
-                    },
+class _PreviousApplicationsState extends State<PreviousApplications> {
+  Widget cardBuilder({
+    @required String name,
+    @required String type,
+    @required String photoUrl,
+    @required DocumentSnapshot snapshot,
+    Color clr,
+  }) {
+    return Card(
+      margin: EdgeInsets.all(10),
+      elevation: 12,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: InkWell(
+        child: Container(
+          color: clr,
+          padding: const EdgeInsets.all(3),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  maxRadius: MediaQuery.of(context).size.height * 0.05,
+                  backgroundImage: NetworkImage(
+                    photoUrl,
                   ),
+                ),
+              ),
+              Text(
+                name,
+                style: TextStyle(fontSize: 20.0),
+              ),
+              Text(
+                type,
+                style: TextStyle(fontSize: 20.0),
+              ),
+            ],
+          ),
+          // height: MediaQuery.of(context).size.height * 0.2,
+          // width: MediaQuery.of(context).size.width * 0.4,
+        ),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return PastLeaveDetails(
+                  snapshot: snapshot,
                 );
               },
             ),
-          ),
-        ),
+          );
+        },
+        splashColor: Colors.redAccent,
       ),
     );
   }
@@ -62,12 +71,11 @@ class _PastLeavesState extends State<PastLeaves> {
   @override
   Widget build(BuildContext context) {
     return LeaveScaffold(
-      title: "Past Leaves",
+      title: "Previous Applications",
       body: FutureBuilder<QuerySnapshot>(
         future: Firestore.instance
             .collection("admin")
             .where("isChecked", isEqualTo: true)
-            .where("email", isEqualTo: GlobalVariables.email)
             .getDocuments(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
@@ -80,7 +88,7 @@ class _PastLeavesState extends State<PastLeaves> {
           } else {
             if (snapshot.hasError) {
               return Center(
-                child: Text("Error occured: ${snapshot.error}"),
+                child: Text("Error occured"),
               );
             } else {
               int length = snapshot.data.documents.length;
@@ -89,11 +97,10 @@ class _PastLeavesState extends State<PastLeaves> {
                 itemBuilder: (BuildContext context, index) {
                   return Card(
                     child: cardBuilder(
-                      snapshot.data.documents[index].data["subject"],
-                      snapshot.data.documents[index].data["type"],
-                      snapshot.data.documents[index].data["startDate"],
-                      snapshot.data.documents[index].data["endDate"],
-                      snapshot.data.documents[index].data["isGranted"],
+                      name: snapshot.data.documents[index].data["name"],
+                      photoUrl: snapshot.data.documents[index].data["photoUrl"],
+                      type: snapshot.data.documents[index].data["type"],
+                      snapshot: snapshot.data.documents[index],
                       clr: (snapshot.data.documents[index].data["type"] ==
                               "Casual")
                           ? Colors.blue[300]

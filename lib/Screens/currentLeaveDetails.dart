@@ -2,74 +2,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
-import 'package:leave_management/Utils/houseKeeping.dart';
 import 'package:pdf/widgets.dart' as leavePdf;
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 
-class LeaveDetails extends StatefulWidget {
+class CurrentLeaveDetails extends StatefulWidget {
   final DocumentSnapshot snapshot;
-  LeaveDetails({@required this.snapshot});
+  CurrentLeaveDetails({@required this.snapshot});
   @override
-  _LeaveDetailsState createState() => _LeaveDetailsState();
+  _CurrentLeaveDetailsState createState() => _CurrentLeaveDetailsState();
 }
 
-class _LeaveDetailsState extends State<LeaveDetails> {
-  Widget cardBuilder(String title, String description) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Card(
-        child: Container(
-          height: 130,
-          width: 450,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          description,
-                          style: TextStyle(fontSize: 15),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-        // shape:
-        //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      ),
-    );
-  }
-
+class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
   @override
   Widget build(BuildContext context) {
     return LeaveScaffold(
       title: "Leave Details",
-      body: SingleChildScrollView(
-        child: leaveDetails(
-          snapshot: widget.snapshot,
-        ),
-      ),
+      body: SingleChildScrollView(child: leaveDetails()),
       floatingButton: FloatingActionButton(
         child: Icon(Icons.file_download),
         onPressed: () async {
@@ -194,7 +143,7 @@ class _LeaveDetailsState extends State<LeaveDetails> {
     return doc.save();
   }
 
-  Widget leaveDetails({@required DocumentSnapshot snapshot}) {
+  Widget leaveDetails() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -202,7 +151,7 @@ class _LeaveDetailsState extends State<LeaveDetails> {
           alignment: Alignment.center,
           padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
           child: Text(
-            "Type: ${snapshot.data["type"]}",
+            "Type: ${widget.snapshot.data["type"]}",
             style: TextStyle(fontSize: 20),
           ),
         ),
@@ -213,7 +162,7 @@ class _LeaveDetailsState extends State<LeaveDetails> {
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "From: ${snapshot.data["name"]}",
+                "From: ${widget.snapshot.data["name"]}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
@@ -234,14 +183,14 @@ class _LeaveDetailsState extends State<LeaveDetails> {
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "Subject: ${snapshot.data["subject"]}",
+                "Subject: ${widget.snapshot.data["subject"]}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "${snapshot.data["reason"]}",
+                "${widget.snapshot.data["reason"]}",
                 textAlign: TextAlign.justify,
                 style: TextStyle(fontSize: 15),
               ),
@@ -249,14 +198,14 @@ class _LeaveDetailsState extends State<LeaveDetails> {
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "From ${snapshot.data["startDate"]}",
+                "From: ${widget.snapshot.data["startDate"]}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "To ${snapshot.data["endDate"]}",
+                "To: ${widget.snapshot.data["startDate"]}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
@@ -272,7 +221,88 @@ class _LeaveDetailsState extends State<LeaveDetails> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+            ),
           ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Container(
+              width: 120,
+              child: FlatButton(
+                child: Text("Approve"),
+                onPressed: () async {
+                  await Firestore.instance
+                      .collection("admin")
+                      .document(
+                          "${widget.snapshot.data["email"]} ${widget.snapshot.data["epochTime"]}")
+                      .setData(
+                    {
+                      "isGranted": true,
+                      "isChecked": true,
+                    },
+                    merge: true,
+                  ).then((onValue) {
+                    print("Leave Approved... Appedning to History");
+                  });
+                  await Firestore.instance
+                      .collection("${widget.snapshot.data["email"]}")
+                      .document("${widget.snapshot.data["type"]}")
+                      .collection("history")
+                      .document("${widget.snapshot.data["epochTime"]}")
+                      .setData({
+                    "reason": widget.snapshot.data["reason"],
+                    "subject": widget.snapshot.data["subject"],
+                    "startDate": widget.snapshot.data["startDate"],
+                    "endDate": widget.snapshot.data["endDate"],
+                    "name": widget.snapshot.data["name"],
+                    "type": widget.snapshot.data["type"],
+                    "isChecked": true,
+                    "isGranted": true,
+                    "epochTime": widget.snapshot.data["epochTime"],
+                    "email": widget.snapshot.data["email"],
+                    "photoUrl": widget.snapshot.data["photoUrl"],
+                  }).then((onValue) {
+                    print("Added data to history");
+                  });
+                },
+                color: Colors.green,
+              ),
+            ),
+            Container(
+              width: 120,
+              child: FlatButton(
+                child: Text("Disapprove"),
+                onPressed: () async {
+                  // DocumentSnapshot docSnap = await Firestore.instance
+                  //     .collection("admin")
+                  //     .document(
+                  //         "${widget.snapshot.data["email"]} ${widget.snapshot.data["epochTime"]}")
+                  //     .get();
+                  ////////////////////////////////
+                  Firestore.instance
+                      .collection("admin")
+                      .document(
+                          "${widget.snapshot.data["email"]} ${widget.snapshot.data["epochTime"]}")
+                      .setData(
+                    {
+                      "isGranted": false,
+                      "isChecked": true,
+                    },
+                    merge: true,
+                  ).then((onValue) {
+                    print("Leave NOT Approved");
+                  });
+                },
+                color: Colors.red,
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20),
         ),
       ],
     );
