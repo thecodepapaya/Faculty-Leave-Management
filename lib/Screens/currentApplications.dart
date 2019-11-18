@@ -11,7 +11,12 @@ class CurrentApplications extends StatefulWidget {
 }
 
 class _CurrentApplicationsState extends State<CurrentApplications> {
-  Widget cardBuilder({String name, String type, String photoUrl}) {
+  Widget cardBuilder({
+    @required String name,
+    @required String type,
+    @required String photoUrl,
+    @required DocumentSnapshot snapshot,
+  }) {
     return Card(
       margin: EdgeInsets.all(10),
       elevation: 12,
@@ -52,15 +57,17 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
                 ),
               ],
             ),
-            height: MediaQuery.of(context).size.height * 0.3,
-            width: MediaQuery.of(context).size.width * 0.4,
+            // height: MediaQuery.of(context).size.height * 0.27,
+            // width: MediaQuery.of(context).size.width * 0.4,
           ),
         ),
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return CurrentLeaveDetails();
+                return CurrentLeaveDetails(
+                  snapshot: snapshot,
+                );
               },
             ),
           );
@@ -75,7 +82,11 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
     return LeaveScaffold(
       title: "Current Applications",
       body: FutureBuilder<QuerySnapshot>(
-        future: Firestore.instance.collection("admin").getDocuments(),
+        future: Firestore.instance
+            .collection("admin")
+            // .where("isGranted", isEqualTo: false)
+            .where("isChecked", isEqualTo: false)
+            .getDocuments(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
               snapshot.connectionState == ConnectionState.none) {
@@ -91,18 +102,29 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
               );
             } else {
               int length = snapshot.data.documents.length;
-              // print("lengths " + snapshot.data.documents.length.toString());
-              return GridView.count(
-                crossAxisCount: 2,
-                children: List<Widget>.generate(length, (index) {
-                  return GridTile(
+              return ListView.builder(
+                itemCount: length,
+                itemBuilder: (BuildContext context, index) {
+                  return Card(
                     child: cardBuilder(
                       name: snapshot.data.documents[index].data["name"],
                       photoUrl: snapshot.data.documents[index].data["photoUrl"],
                       type: snapshot.data.documents[index].data["type"],
+                      snapshot: snapshot.data.documents[index],
                     ),
                   );
-                }),
+                },
+                // crossAxisCount: 2,
+                // children: List<Widget>.generate(length, (index) {
+                //   return Card(
+                //     child: cardBuilder(
+                //       name: snapshot.data.documents[index].data["name"],
+                //       photoUrl: snapshot.data.documents[index].data["photoUrl"],
+                //       type: snapshot.data.documents[index].data["type"],
+                //       snapshot: snapshot.data.documents[index],
+                //     ),
+                //   );
+                // }),
               );
             }
           }
