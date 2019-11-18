@@ -84,7 +84,7 @@ class _LeaveFormState extends State<LeaveForm> {
                         "isGranted": false,
                         "epochTime": epochTime,
                         "email": GlobalVariables.user.email,
-                        "photoUrl": GlobalVariables.user.phoneNumber,
+                        "photoUrl": GlobalVariables.user.photoUrl,
                       }).then((onValue) {
                         Navigator.pop(context);
                         Navigator.pop(context);
