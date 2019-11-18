@@ -184,7 +184,7 @@ class _LeaveFormState extends State<LeaveForm> {
                 maxLines: 2,
                 maxLength: 50,
                 validator: (String val) {
-                  if (val.isNotEmpty) {
+                  if (val.isEmpty) {
                     return "Subject cannot be empty";
                   } else
                     return null;
@@ -268,7 +268,7 @@ class _LeaveFormState extends State<LeaveForm> {
               TextFormField(
                 controller: _reasonController,
                 validator: (val) {
-                  if (val.isNotEmpty) {
+                  if (val.isEmpty) {
                     return "Reason cannot be Empty";
                   } else
                     return null;
