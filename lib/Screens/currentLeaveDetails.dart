@@ -254,7 +254,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
                       .collection("${widget.snapshot.data["email"]}")
                       .document("${widget.snapshot.data["type"]}")
                       .collection("history")
-                      .document("${widget.snapshot.data["type"]}")
+                      .document("${widget.snapshot.data["epochTime"]}")
                       .setData({
                     "reason": widget.snapshot.data["reason"],
                     "subject": widget.snapshot.data["subject"],
