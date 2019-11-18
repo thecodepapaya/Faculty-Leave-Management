@@ -73,8 +73,8 @@ class _PastLeavesState extends State<PastLeaves> {
       body: FutureBuilder<QuerySnapshot>(
         future: Firestore.instance
             .collection("admin")
+            .where("email", isEqualTo: GlobalVariables.user.email)
             .where("isChecked", isEqualTo: true)
-            .where("email", isEqualTo: GlobalVariables.email)
             .getDocuments(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
@@ -90,6 +90,7 @@ class _PastLeavesState extends State<PastLeaves> {
                 child: Text("Error occured: ${snapshot.error}"),
               );
             } else {
+              // print(snapshot.data.documents.first.data);
               int length = snapshot.data.documents.length;
               return ListView.builder(
                 itemCount: length,

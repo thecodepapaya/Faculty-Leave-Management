@@ -41,9 +41,9 @@ class _SignInState extends State<SignInScreen> {
     //save global variables
     GlobalVariables.user = user;
     HouseKeeping.initializeUserData(emailId: user.email);
-    GlobalVariables.prefs.setString(GlobalVariables.emailPrefs, user.email);
-    GlobalVariables.prefs
-        .setString(GlobalVariables.namePrefs, user.displayName);
+    // GlobalVariables.prefs.setString(GlobalVariables.emailPrefs, user.email);
+    // GlobalVariables.prefs
+    //     .setString(GlobalVariables.namePrefs, user.displayName);
     GlobalVariables.prefs.setString(GlobalVariables.timeStampPrefs,
         DateTime.now().millisecondsSinceEpoch.toString());
     print("======Successfully saved global variables");
