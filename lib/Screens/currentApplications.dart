@@ -16,6 +16,7 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
     @required String type,
     @required String photoUrl,
     @required DocumentSnapshot snapshot,
+    Color clr,
   }) {
     return Card(
       margin: EdgeInsets.all(10),
@@ -26,6 +27,7 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
       child: InkWell(
         child: SingleChildScrollView(
           child: Container(
+            color: clr,
             padding: const EdgeInsets.all(3),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -111,6 +113,16 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
                       photoUrl: snapshot.data.documents[index].data["photoUrl"],
                       type: snapshot.data.documents[index].data["type"],
                       snapshot: snapshot.data.documents[index],
+                      clr: (snapshot.data.documents[index].data["type"] ==
+                              "Casual")
+                          ? Colors.blue[300]
+                          : (snapshot.data.documents[index].data["type"] ==
+                                  "Medical")
+                              ? Colors.red[300]
+                              : ((snapshot.data.documents[index].data["type"] ==
+                                      "ChildCare")
+                                  ? Colors.deepPurple[200]
+                                  : Colors.green[300]),
                     ),
                   );
                 },

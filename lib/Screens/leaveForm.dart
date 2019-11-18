@@ -65,6 +65,10 @@ class _LeaveFormState extends State<LeaveForm> {
                     ),
                   ),
                   FlatButton(
+                    child: Text(
+                      "Proceed",
+                      style: TextStyle(fontSize: 20),
+                    ),
                     textColor: Colors.blue,
                     onPressed: () async {
                       var document = await Firestore.instance
@@ -107,10 +111,7 @@ class _LeaveFormState extends State<LeaveForm> {
                         });
                       }
                     },
-                    child: Text(
-                      "Proceed",
-                      style: TextStyle(fontSize: 20),
-                    ),
+                    
                   ),
                 ],
               );

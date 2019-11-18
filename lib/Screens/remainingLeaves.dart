@@ -219,7 +219,7 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                               left: 40.0,
                               child: detailsCard(
                                   "Vacation Leave",
-                                  Colors.red[300],
+                                  Colors.orange[200],
                                   snapshot.data.documents[11].data["total"],
                                   snapshot
                                       .data.documents[11].data["remaining"]),
