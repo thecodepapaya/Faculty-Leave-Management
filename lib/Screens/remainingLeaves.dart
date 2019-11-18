@@ -101,8 +101,8 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                               child: detailsCard(
                                   "MedicalLeave",
                                   Colors.red[300],
-                                  snapshot.data.documents[5].data["total"],
-                                  snapshot.data.documents[5].data["remaining"]),
+                                  snapshot.data.documents[8].data["total"],
+                                  snapshot.data.documents[8].data["remaining"]),
                             ),
                             Positioned(
                                 top: 27.5,
@@ -145,8 +145,8 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                               child: detailsCard(
                                   "Paid Leave",
                                   Colors.green[300],
-                                  snapshot.data.documents[6].data["total"],
-                                  snapshot.data.documents[6].data["remaining"]),
+                                  snapshot.data.documents[4].data["total"],
+                                  snapshot.data.documents[4].data["remaining"]),
                             ),
                             Positioned(
                                 top: 27.5,
@@ -189,8 +189,8 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                               child: detailsCard(
                                   "Paternity Leave",
                                   Colors.lightGreen[200],
-                                  snapshot.data.documents[7].data["total"],
-                                  snapshot.data.documents[7].data["remaining"]),
+                                  snapshot.data.documents[9].data["total"],
+                                  snapshot.data.documents[9].data["remaining"]),
                             ),
                             Positioned(
                                 top: 27.5,
@@ -211,9 +211,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                               child: detailsCard(
                                   "Special Casual Leave",
                                   Colors.orange[200],
-                                  snapshot.data.documents[10].data["total"],
+                                  snapshot.data.documents[12].data["total"],
                                   snapshot
-                                      .data.documents[10].data["remaining"]),
+                                      .data.documents[12].data["remaining"]),
                             ),
                             Positioned(
                                 top: 27.5,
@@ -234,9 +234,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                               child: detailsCard(
                                   "Vacation Leave",
                                   Colors.orange[200],
-                                  snapshot.data.documents[11].data["total"],
+                                  snapshot.data.documents[13].data["total"],
                                   snapshot
-                                      .data.documents[11].data["remaining"]),
+                                      .data.documents[13].data["remaining"]),
                             ),
                             Positioned(
                                 top: 27.5,
@@ -280,8 +280,8 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                               child: detailsCard(
                                   "Leave not due",
                                   Colors.green[300],
-                                  snapshot.data.documents[3].data["total"],
-                                  snapshot.data.documents[3].data["remaining"]),
+                                  snapshot.data.documents[5].data["total"],
+                                  snapshot.data.documents[5].data["remaining"]),
                             ),
                             Positioned(
                                 top: 27.5,
@@ -302,8 +302,8 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                               child: detailsCard(
                                   "Lien",
                                   Colors.deepPurple[200],
-                                  snapshot.data.documents[4].data["total"],
-                                  snapshot.data.documents[4].data["remaining"]),
+                                  snapshot.data.documents[6].data["total"],
+                                  snapshot.data.documents[6].data["remaining"]),
                             ),
                             Positioned(
                                 top: 27.5,
@@ -325,8 +325,9 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                               child: detailsCard(
                                   "Sabbatical Leave",
                                   Colors.lightGreen[200],
-                                  snapshot.data.documents[9].data["total"],
-                                  snapshot.data.documents[9].data["remaining"]),
+                                  snapshot.data.documents[10].data["total"],
+                                  snapshot
+                                      .data.documents[10].data["remaining"]),
                             ),
                             Positioned(
                                 top: 27.5,
@@ -347,13 +348,35 @@ class _RemainingLeavesState extends State<RemainingLeaves> {
                               child: detailsCard(
                                   "Special Leave",
                                   Colors.orange[200],
-                                  snapshot.data.documents[10].data["total"],
+                                  snapshot.data.documents[11].data["total"],
                                   snapshot
-                                      .data.documents[10].data["remaining"]),
+                                      .data.documents[11].data["remaining"]),
                             ),
                             Positioned(
                                 top: 27.5,
                                 child: new Icon(FontAwesomeIcons.stripeS)),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 19.0, vertical: 8.0),
+                      child: Container(
+                        height: 115,
+                        child: Stack(
+                          children: <Widget>[
+                            Positioned(
+                              left: 40.0,
+                              child: detailsCard(
+                                  "Maternity",
+                                  Colors.orange[200],
+                                  snapshot.data.documents[7].data["total"],
+                                  snapshot.data.documents[7].data["remaining"]),
+                            ),
+                            Positioned(
+                                top: 27.5,
+                                child: new Icon(FontAwesomeIcons.female)),
                           ],
                         ),
                       ),
