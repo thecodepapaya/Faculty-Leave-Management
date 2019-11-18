@@ -46,74 +46,78 @@ class _LeaveFormState extends State<LeaveForm> {
       title: "Leave Form",
       floatingButton: FloatingActionButton(
         onPressed: () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text("Submit"),
-                content: Text(
-                    "Please check your details. After proceeding you will not be able to edit your details."),
-                actions: <Widget>[
-                  FlatButton(
-                    textColor: Colors.blue,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      "Cancel",
-                      style: TextStyle(fontSize: 20),
+          if (_formKey.currentState.validate()) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Submit"),
+                  content: Text(
+                      "Please check your details. After proceeding you will not be able to edit your details."),
+                  actions: <Widget>[
+                    FlatButton(
+                      textColor: Colors.blue,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
-                  ),
-                  FlatButton(
-                    child: Text(
-                      "Proceed",
-                      style: TextStyle(fontSize: 20),
+                    FlatButton(
+                      child: Text(
+                        "Proceed",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      textColor: Colors.blue,
+                      onPressed: () async {
+                        var document = await Firestore.instance
+                            .collection("${GlobalVariables.user.email}")
+                            .document("$_leaveType")
+                            .get();
+                        print("=============================");
+                        print("${GlobalVariables.user.email}");
+                        print("$_leaveType");
+                        print(document.data);
+                        int count = document.data["remaining"];
+                        if (document.data["remaining"] == 0) {
+                          print("No Leave left");
+                        } else {
+                          await Firestore.instance
+                              .collection("${GlobalVariables.user.email}")
+                              .document("$_leaveType")
+                              .setData({"remaining": count - 1}, merge: true);
+                          String epochTime =
+                              DateTime.now().millisecondsSinceEpoch.toString();
+                          await Firestore.instance
+                              .collection("admin")
+                              .document(
+                                  "${GlobalVariables.user.email} " + epochTime)
+                              .setData({
+                            "reason": _reasonController.text,
+                            "subject": _subjectController.text,
+                            "startDate": _startDateController.text,
+                            "endDate": _endDateController.text,
+                            "name": GlobalVariables.user.displayName,
+                            "type": _leaveType,
+                            "isChecked": false,
+                            "isGranted": false,
+                            "epochTime": epochTime,
+                            "email": GlobalVariables.user.email,
+                            "photoUrl": GlobalVariables.user.photoUrl,
+                          }).then((onValue) {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          });
+                        }
+                      },
                     ),
-                    textColor: Colors.blue,
-                    onPressed: () async {
-                      var document = await Firestore.instance
-                          .collection("${GlobalVariables.user.email}")
-                          .document("$_leaveType")
-                          .get();
-                      print("=============================");
-                      print("${GlobalVariables.user.email}");
-                      print("$_leaveType");
-                      print(document.data);
-                      int count = document.data["remaining"];
-                      if (document.data["remaining"] == 0) {
-                        print("No Leave left");
-                      } else {
-                        
-                        String epochTime =
-                            DateTime.now().millisecondsSinceEpoch.toString();
-                        await Firestore.instance
-                            .collection("admin")
-                            .document(
-                                "${GlobalVariables.user.email} " + epochTime)
-                            .setData({
-                          "reason": _reasonController.text,
-                          "subject": _subjectController.text,
-                          "startDate": _startDateController.text,
-                          "endDate": _endDateController.text,
-                          "name": GlobalVariables.user.displayName,
-                          "type": _leaveType,
-                          "isChecked": false,
-                          "isGranted": false,
-                          "epochTime": epochTime,
-                          "email": GlobalVariables.user.email,
-                          "photoUrl": GlobalVariables.user.photoUrl,
-                        }).then((onValue) {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        });
-                      }
-                    },
-                    
-                  ),
-                ],
-              );
-            },
-          );
+                  ],
+                );
+              },
+            );
+          }
         },
         tooltip: "Submit",
         child: Icon(Icons.send),
@@ -179,8 +183,12 @@ class _LeaveFormState extends State<LeaveForm> {
                 ),
                 maxLines: 2,
                 maxLength: 50,
-                // validator: (String val){
-                // },
+                validator: (String val) {
+                  if (val.isEmpty) {
+                    return "Subject cannot be empty";
+                  } else
+                    return null;
+                },
               ),
               // TextFormField(
               //   controller: _startDateController,
@@ -246,7 +254,7 @@ class _LeaveFormState extends State<LeaveForm> {
                 ),
                 validator: (value) {
                   if (value == null) {
-                    return "Enter date";
+                    return "Enter Ending date";
                   } else if (startDateTime == null) {
                     return "Please enter start date";
                   } else if (value.isBefore(DateTime.now())) {
@@ -259,6 +267,12 @@ class _LeaveFormState extends State<LeaveForm> {
               ),
               TextFormField(
                 controller: _reasonController,
+                validator: (val) {
+                  if (val.isEmpty) {
+                    return "Reason cannot be Empty";
+                  } else
+                    return null;
+                },
                 inputFormatters: [
                   BlacklistingTextInputFormatter(
                     RegExp("[\/\*]"),
