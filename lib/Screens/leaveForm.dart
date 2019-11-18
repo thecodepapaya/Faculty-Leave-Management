@@ -1,5 +1,6 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:intl/intl.dart';
 import 'package:leave_management/Utils/GlobalVariables.dart';
@@ -15,20 +16,20 @@ class _LeaveFormState extends State<LeaveForm> {
   String _leaveType = ' ';
   List<String> _leavesList = <String>[
     ' ',
-    GlobalVariables.casualLeave,
-    GlobalVariables.childCare,
-    GlobalVariables.maternity,
-    GlobalVariables.medical,
-    GlobalVariables.paternity,
-    GlobalVariables.halfPaid,
-    GlobalVariables.fullPaid,
-    GlobalVariables.specialCasual,
-    GlobalVariables.vacation,
-    GlobalVariables.extraOrdinary,
-    GlobalVariables.leaveNotDue,
-    GlobalVariables.lien,
-    GlobalVariables.sabbatical,
-    GlobalVariables.special,
+    'Casual',
+    'ChildCare',
+    'Maternity',
+    'Medical',
+    'Paternity',
+    'HalfPaid',
+    'FullPaid',
+    'SpecialCasual',
+    'Vacation',
+    'ExtraOrdinary',
+    'LeaveNotDue',
+    'Lien',
+    'Sabbatical',
+    'Special'
   ];
 
   TextEditingController _reasonController = TextEditingController();
@@ -37,6 +38,7 @@ class _LeaveFormState extends State<LeaveForm> {
   TextEditingController _endDateController = TextEditingController();
 
   final format = DateFormat("dd-MMM-yyyy");
+  DateTime startDateTime;
 
   @override
   Widget build(BuildContext context) {
@@ -65,28 +67,45 @@ class _LeaveFormState extends State<LeaveForm> {
                   FlatButton(
                     textColor: Colors.blue,
                     onPressed: () async {
-                      String epochTime =
-                          DateTime.now().millisecondsSinceEpoch.toString();
-                      await Firestore.instance
-                          .collection("admin")
-                          .document(
-                              "${GlobalVariables.user.email} " + epochTime)
-                          .setData({
-                        "reason": _reasonController.text,
-                        "subject": _subjectController.text,
-                        "startDate": _startDateController.text,
-                        "endDate": _endDateController.text,
-                        "name": GlobalVariables.user.displayName,
-                        "type": _leaveType,
-                        "isChecked": false,
-                        "isGranted": false,
-                        "epochTime": epochTime,
-                        "email": GlobalVariables.user.email,
-                        "photoUrl": GlobalVariables.user.phoneNumber,
-                      }).then((onValue) {
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                      });
+                      var document = await Firestore.instance
+                          .collection("${GlobalVariables.user.email}")
+                          .document("$_leaveType")
+                          .get();
+                      print("=============================");
+                      print("${GlobalVariables.user.email}");
+                      print("$_leaveType");
+                      print(document.data);
+                      int count = document.data["remaining"];
+                      if (document.data["remaining"] == 0) {
+                        print("No Leave left");
+                      } else {
+                        await Firestore.instance
+                            .collection("${GlobalVariables.user.email}")
+                            .document("$_leaveType")
+                            .setData({"remaining": count - 1}, merge: true);
+                        String epochTime =
+                            DateTime.now().millisecondsSinceEpoch.toString();
+                        await Firestore.instance
+                            .collection("admin")
+                            .document(
+                                "${GlobalVariables.user.email} " + epochTime)
+                            .setData({
+                          "reason": _reasonController.text,
+                          "subject": _subjectController.text,
+                          "startDate": _startDateController.text,
+                          "endDate": _endDateController.text,
+                          "name": GlobalVariables.user.displayName,
+                          "type": _leaveType,
+                          "isChecked": false,
+                          "isGranted": false,
+                          "epochTime": epochTime,
+                          "email": GlobalVariables.user.email,
+                          "photoUrl": GlobalVariables.user.photoUrl,
+                        }).then((onValue) {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        });
+                      }
                     },
                     child: Text(
                       "Proceed",
@@ -109,6 +128,15 @@ class _LeaveFormState extends State<LeaveForm> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             children: <Widget>[
               new FormField(
+                validator: (String value) {
+                  if (value == null) {
+                    return "Cannot be empty";
+                  } else if (value.isEmpty || value == '') {
+                    return "Cannot be empty";
+                  } else {
+                    return null;
+                  }
+                },
                 builder: (FormFieldState state) {
                   return InputDecorator(
                     decoration: InputDecoration(
@@ -124,6 +152,7 @@ class _LeaveFormState extends State<LeaveForm> {
                         onChanged: (String newValue) {
                           setState(() {
                             _leaveType = newValue;
+                            // if (newValue == "") {}
                             state.didChange(newValue);
                           });
                         },
@@ -140,6 +169,11 @@ class _LeaveFormState extends State<LeaveForm> {
               ),
               TextFormField(
                 controller: _subjectController,
+                inputFormatters: [
+                  BlacklistingTextInputFormatter(
+                    RegExp("[\/\*]"),
+                  ),
+                ],
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.note_add),
                   hintText: 'Enter Subject',
@@ -147,6 +181,8 @@ class _LeaveFormState extends State<LeaveForm> {
                 ),
                 maxLines: 2,
                 maxLength: 50,
+                // validator: (String val){
+                // },
               ),
               // TextFormField(
               //   controller: _startDateController,
@@ -160,18 +196,31 @@ class _LeaveFormState extends State<LeaveForm> {
               DateTimeField(
                 controller: _startDateController,
                 format: DateFormat("dd-MMM-yyyy"),
+                onChanged: (value) {
+                  startDateTime = value;
+                  print("Current val: $value");
+                },
                 onShowPicker: (context, currentValue) {
                   return showDatePicker(
-                      context: context,
-                      firstDate: DateTime(1900),
-                      initialDate: currentValue ?? DateTime.now(),
-                      lastDate: DateTime(2100));
+                    context: context,
+                    firstDate: DateTime(1900),
+                    initialDate: currentValue ?? DateTime.now(),
+                    lastDate: DateTime(2100),
+                  );
                 },
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.date_range),
                   hintText: 'Enter Start Date',
                   labelText: 'Starting date',
                 ),
+                validator: (value) {
+                  if (value == null) {
+                    return "Enter start date";
+                  } else if (value.isBefore(DateTime.now()))
+                    return "Leaves cannot be in past";
+                  else
+                    return null;
+                },
               ),
               // TextFormField(
               //   controller: _endDateController,
@@ -194,12 +243,29 @@ class _LeaveFormState extends State<LeaveForm> {
                 },
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.date_range),
-                  hintText: 'Enter Start Date',
-                  labelText: 'Starting date',
+                  hintText: 'Enter Ending Date',
+                  labelText: 'Ending date',
                 ),
+                validator: (value) {
+                  if (value == null) {
+                    return "Enter date";
+                  } else if (startDateTime == null) {
+                    return "Please enter start date";
+                  } else if (value.isBefore(DateTime.now())) {
+                    return "Leaves cannot be in Past";
+                  } else if (value.isBefore(startDateTime)) {
+                    return "Invalid Date range";
+                  } else
+                    return null;
+                },
               ),
               TextFormField(
                 controller: _reasonController,
+                inputFormatters: [
+                  BlacklistingTextInputFormatter(
+                    RegExp("[\/\*]"),
+                  ),
+                ],
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.speaker_notes),
                   hintText: 'Enter Reason',

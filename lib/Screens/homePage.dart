@@ -42,11 +42,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     animation2 = Tween(
       begin: 0.0,
       end: 1.0,
-    ).animate(controller1);
+    ).animate(controller2);
     animation3 = Tween(
       begin: 0.0,
       end: 1.0,
-    ).animate(controller1);
+    ).animate(controller3);
     Timer(Duration(milliseconds: 0), () {
       controller1.forward();
     });

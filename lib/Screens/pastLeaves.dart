@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leave_management/Screens/leaveDetails.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
+import 'package:leave_management/Utils/houseKeeping.dart';
 
 class PastLeaves extends StatefulWidget {
   @override
@@ -25,8 +26,9 @@ class _PastLeavesState extends State<PastLeaves> {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Card(
-        // color: HouseKeeping.randomColor(density: 100),
-        color: clr,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        color: HouseKeeping.randomColor(density: 100),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
@@ -55,8 +57,6 @@ class _PastLeavesState extends State<PastLeaves> {
             ),
           ),
         ),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       ),
     );
   }
