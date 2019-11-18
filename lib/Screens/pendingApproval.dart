@@ -11,7 +11,7 @@ class PendingApproval extends StatefulWidget {
 }
 
 class _PendingApprovalState extends State<PendingApproval> {
-  Widget leaveCard({@required DocumentSnapshot snapshot}) {
+  Widget leaveCard({@required DocumentSnapshot snapshot, Color clr}) {
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
       child: Card(
@@ -25,7 +25,28 @@ class _PendingApprovalState extends State<PendingApproval> {
               style: TextStyle(fontSize: 24, color: Colors.white),
             ),
             decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(10)),
+                color: (snapshot.data["type"] == "Casual")
+                    ? Colors.blue[300]
+                    : (snapshot.data["type"] == "Medical")
+                        ? Colors.red[300]
+                        : ((snapshot.data["type"] == "ChildCare")
+                            ? Colors.deepPurple[200]
+                            : (snapshot.data["type"] == "FullPaid")
+                                ? Colors.green[300]
+                                : (snapshot.data["type"] == "Paternity")
+                                    ? Colors.lightGreen[200]
+                                    : ((snapshot.data["type"] == "Vacation")
+                                        ? Colors.orange[200]
+                                        : (snapshot.data["type"] == "Lien")
+                                            ? Colors.deepPurple[200]
+                                            : (snapshot.data["type"] ==
+                                                    "Sabbatical")
+                                                ? Colors.lightGreen[200]
+                                                : (snapshot.data["type"] ==
+                                                        "Special")
+                                                    ? Colors.orange[200]
+                                                    : Colors.lightBlue[200])),
+                borderRadius: BorderRadius.circular(10)),
           ),
           title: Text("${snapshot.data["type"]}"),
           subtitle: Text("${snapshot.data["subject"]}"),

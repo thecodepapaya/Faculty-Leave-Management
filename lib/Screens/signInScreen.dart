@@ -18,13 +18,49 @@ class _SignInState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return LeaveScaffold(
-      title: "Sign In",
-      body: Center(
-        child: RaisedButton(
-          child: Text("Sign In"),
-          onPressed: handleGoogleSignIn,
-        ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Image(
+            image: AssetImage("assets/images/sign.jpeg"),
+            fit: BoxFit.fill,
+            height: double.infinity,
+            width: double.infinity,
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Welcome",
+                  style: TextStyle(fontSize: 32, color: Colors.white),
+                ),
+                SizedBox(
+                  height: 200,
+                ),
+                Container(
+                  width: 150,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.white,
+                          width: 3)),
+                  child: FlatButton(
+                    child: Text(
+                      "Sign In",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    ),
+                    onPressed: handleGoogleSignIn,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
