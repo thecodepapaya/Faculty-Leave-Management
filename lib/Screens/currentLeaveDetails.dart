@@ -179,7 +179,7 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 10, 18.0, 10),
               child: Text(
-                "Date: ${DateTime.fromMillisecondsSinceEpoch(int.parse(widget.snapshot.data["epochTime"]))}",
+                "Date: ${DateFormat("dd-MMM-yyyy").format(DateTime.fromMillisecondsSinceEpoch(int.parse(widget.snapshot.data["epochTime"])))}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
@@ -236,7 +236,41 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
               width: 120,
               child: FlatButton(
                 child: Text("Approve"),
-                onPressed: () {},
+                onPressed: () async {
+                  await Firestore.instance
+                      .collection("admin")
+                      .document(
+                          "${widget.snapshot.data["email"]} ${widget.snapshot.data["epochTime"]}")
+                      .setData(
+                    {
+                      "isGranted": true,
+                      "isChecked": true,
+                    },
+                    merge: true,
+                  ).then((onValue) {
+                    print("Leave Approved... Appedning to History");
+                  });
+                  await Firestore.instance
+                      .collection("${widget.snapshot.data["email"]}")
+                      .document("${widget.snapshot.data["type"]}")
+                      .collection("history")
+                      .document("${widget.snapshot.data["type"]}")
+                      .setData({
+                    "reason": widget.snapshot.data["reason"],
+                    "subject": widget.snapshot.data["subject"],
+                    "startDate": widget.snapshot.data["startDate"],
+                    "endDate": widget.snapshot.data["endDate"],
+                    "name": widget.snapshot.data["name"],
+                    "type": widget.snapshot.data["type"],
+                    "isChecked": true,
+                    "isGranted": true,
+                    "epochTime": widget.snapshot.data["epochTime"],
+                    "email": widget.snapshot.data["email"],
+                    "photoUrl": widget.snapshot.data["photoUrl"],
+                  }).then((onValue) {
+                    print("Added data to history");
+                  });
+                },
                 color: Colors.green,
               ),
             ),
@@ -244,7 +278,27 @@ class _CurrentLeaveDetailsState extends State<CurrentLeaveDetails> {
               width: 120,
               child: FlatButton(
                 child: Text("Disapprove"),
-                onPressed: () {},
+                onPressed: () async {
+                  // DocumentSnapshot docSnap = await Firestore.instance
+                  //     .collection("admin")
+                  //     .document(
+                  //         "${widget.snapshot.data["email"]} ${widget.snapshot.data["epochTime"]}")
+                  //     .get();
+                  ////////////////////////////////
+                  Firestore.instance
+                      .collection("admin")
+                      .document(
+                          "${widget.snapshot.data["email"]} ${widget.snapshot.data["epochTime"]}")
+                      .setData(
+                    {
+                      "isGranted": false,
+                      "isChecked": true,
+                    },
+                    merge: true,
+                  ).then((onValue) {
+                    print("Leave NOT Approved");
+                  });
+                },
                 color: Colors.red,
               ),
             ),
