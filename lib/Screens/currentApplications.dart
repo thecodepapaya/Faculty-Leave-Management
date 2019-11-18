@@ -72,7 +72,11 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
     return LeaveScaffold(
       title: "Current Applications",
       body: FutureBuilder<QuerySnapshot>(
-        future: Firestore.instance.collection("admin").getDocuments(),
+        future: Firestore.instance
+            .collection("admin")
+            // .where("isGranted", isEqualTo: false)
+            .where("isChecked", isEqualTo: false)
+            .getDocuments(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting ||
               snapshot.connectionState == ConnectionState.none) {
@@ -88,7 +92,6 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
               );
             } else {
               int length = snapshot.data.documents.length;
-              // print("lengths " + snapshot.data.documents.length.toString());
               return GridView.count(
                 crossAxisCount: 2,
                 children: List<Widget>.generate(length, (index) {
