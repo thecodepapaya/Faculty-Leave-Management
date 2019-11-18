@@ -44,7 +44,6 @@ class _PastLeavesState extends State<PastLeaves> {
               ),
               subtitle: listDetail(type, from, to),
               onTap: () {
-<<<<<<< HEAD
                 // Navigator.of(context).push(
                 //   MaterialPageRoute(
                 //     builder: (BuildContext context) {
@@ -54,20 +53,6 @@ class _PastLeavesState extends State<PastLeaves> {
                 //     },
                 //   ),
                 // );
-=======
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return LeaveDetails(
-                        title: subject,
-                        reason: type,
-                        fromDate: from,
-                        toDate: to,
-                      );
-                    },
-                  ),
-                );
->>>>>>> b8c722f23bc96bd400b4d35b6f9c25050ac18f1d
               },
             ),
           ),
