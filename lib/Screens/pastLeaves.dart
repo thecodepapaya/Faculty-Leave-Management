@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:leave_management/Screens/leaveDetails.dart';
+import 'package:leave_management/Utils/GlobalVariables.dart';
 import 'package:leave_management/Utils/LeaveScaffold.dart';
 import 'package:leave_management/Utils/houseKeeping.dart';
 
@@ -64,37 +67,64 @@ class _PastLeavesState extends State<PastLeaves> {
   Widget build(BuildContext context) {
     return LeaveScaffold(
       title: "Past Leaves",
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-                child: cardBuilder("Leave due to cough and cold",
-                    "Medical Leave", "October 15 ,2019", "October 17 ,2019"),
+      body: FutureBuilder(
+        future: Firestore.instance
+            .collection(GlobalVariables.user.email)
+            .getDocuments(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting ||
+              snapshot.connectionState == ConnectionState.none) {
+            return Center(
+              child: SpinKitWanderingCubes(
+                color: Colors.red,
               ),
-              cardBuilder("Leave for personal reason", "Casual Leave",
-                  "September 14 ,2019", "September 17 ,2019"),
-              cardBuilder(
-                  "Vacation", "Vacation", "May 12 ,2019", "June 25 ,2019"),
-              cardBuilder("Leave due to cough and cold", "Sick Leave",
-                  "April 15 ,2019", "April 16 ,2019"),
-              cardBuilder("Child-care Leave", "Child Care Leave",
-                  "March 4 ,2019", "March 24 ,2019"),
-              cardBuilder("Paternity", "Paternity Leave", "February 20 ,2019",
-                  "February 28 ,2019"),
-              cardBuilder("Leave due to Viral Fever", "Medical Leave",
-                  "January 10 ,2019", "January 15 ,2019"),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 8),
-                child: cardBuilder("Leave due to personal reason",
-                    "Casual Leave", "December 20 ,2018", "December 25 , 2018"),
-              ),
-            ],
-          ),
-          // decoration: BoxDecoration(color: Colors.blue[100]),
-          // width: MediaQuery.of(context).size.width * 1.0,
-        ),
+            );
+          } else {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text("Error occured"),
+              );
+            } else
+              return SingleChildScrollView(
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                        child: cardBuilder(
+                            "Leave due to cough and cold",
+                            "Medical Leave",
+                            "October 15 ,2019",
+                            "October 17 ,2019"),
+                      ),
+                      cardBuilder("Leave for personal reason", "Casual Leave",
+                          "September 14 ,2019", "September 17 ,2019"),
+                      cardBuilder("Vacation", "Vacation", "May 12 ,2019",
+                          "June 25 ,2019"),
+                      cardBuilder("Leave due to cough and cold", "Sick Leave",
+                          "April 15 ,2019", "April 16 ,2019"),
+                      cardBuilder("Child-care Leave", "Child Care Leave",
+                          "March 4 ,2019", "March 24 ,2019"),
+                      cardBuilder("Paternity", "Paternity Leave",
+                          "February 20 ,2019", "February 28 ,2019"),
+                      cardBuilder("Leave due to Viral Fever", "Medical Leave",
+                          "January 10 ,2019", "January 15 ,2019"),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 8),
+                        child: cardBuilder(
+                            "Leave due to personal reason",
+                            "Casual Leave",
+                            "December 20 ,2018",
+                            "December 25 , 2018"),
+                      ),
+                    ],
+                  ),
+                  // decoration: BoxDecoration(color: Colors.blue[100]),
+                  // width: MediaQuery.of(context).size.width * 1.0,
+                ),
+              );
+          }
+        },
       ),
     );
   }
