@@ -11,7 +11,12 @@ class CurrentApplications extends StatefulWidget {
 }
 
 class _CurrentApplicationsState extends State<CurrentApplications> {
-  Widget cardBuilder({String name, String reason, String photoUrl}) {
+  Widget cardBuilder({
+    @required String name,
+    @required String reason,
+    @required String photoUrl,
+    @required DocumentSnapshot snapshot,
+  }) {
     return Card(
       margin: EdgeInsets.all(10),
       elevation: 12,
@@ -50,7 +55,9 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return CurrentLeaveDetails();
+                return CurrentLeaveDetails(
+                  snapshot: snapshot,
+                );
               },
             ),
           );
@@ -90,6 +97,7 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
                       name: snapshot.data.documents[index].data["name"],
                       photoUrl: snapshot.data.documents[index].data["photoUrl"],
                       reason: snapshot.data.documents[index].data["reason"],
+                      snapshot: snapshot.data.documents[index],
                     ),
                   );
                 }),
