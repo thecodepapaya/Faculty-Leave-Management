@@ -5,6 +5,8 @@ class GlobalVariables {
   static SharedPreferences prefs;
   static FirebaseUser user;
 
+  static List<dynamic> adminEmails;
+
   static String emailPrefs = "emailPrefs";
   static String namePrefs = "namePrefs";
   static String timeStampPrefs = "timeStampPrefs";

@@ -15,11 +15,19 @@ void main() async {
   });
 
   DocumentSnapshot docSnap =
-      await Firestore.instance.collection("meta").document("data").get();
+      await Firestore.instance.collection("meta").document("adminData").get();
   // //get timestamp in milliseconds from FieldValue.serverTimeStamp
   // //in string
-  GlobalVariables.timeStamp = docSnap.data["lastUsed"].seconds.toString() +
-      docSnap.data["lastUsed"].nanoseconds.toString().substring(0, 3);
+  // GlobalVariables.timeStamp = docSnap.data["lastUsed"].seconds.toString() +
+  //     docSnap.data["lastUsed"].nanoseconds.toString().substring(0, 3);
+
+  // print("Admins: ${docSnap.data["email"]}");
+  GlobalVariables.adminEmails = List();
+  for (int i = 0; i < docSnap.data["email"].length; i++) {
+    GlobalVariables.adminEmails.add(docSnap.data["email"][i]);
+  }
+  // print(GlobalVariables.adminEmails);
+  // GlobalVariables.adminEmails.add(docSnap.data["email"]);
   // print("Time stamp: ${GlobalVariables.timeStamp}");
   // GlobalVariables.timeStamp =
   //     GlobalVariables.prefs.getString(GlobalVariables.timeStampPrefs);
@@ -31,9 +39,9 @@ void main() async {
   // print(
   //     "Fetched Details: \ntimestamp: ${GlobalVariables.timeStamp}\nemail: ${GlobalVariables.email}\nname: ${GlobalVariables.name}");
 
-  Timer.periodic(Duration(days: 1), (_) {
-    ticker.tickDay();
-  });
+  // Timer.periodic(Duration(days: 1), (_) {
+  //   ticker.tickDay();
+  // });
 
   runApp(MyApp());
 }

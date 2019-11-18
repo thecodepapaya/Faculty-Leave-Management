@@ -70,162 +70,166 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return !widget.user.email.endsWith("@iiitvadodara.ac.in")
         ? notAllowedScreen()
-        : LeaveScaffold(
-            title: "Home page",
-            body: Stack(
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.elliptical(150.0, 50.0),
-                    bottomRight: Radius.elliptical(150.0, 50.0),
-                  ),
-                  child: Image(
-                    width: double.infinity,
-                    fit: BoxFit.fill,
-                    image: AssetImage('assets/images/image.png'),
-                  ),
-                ),
-                // Image.asset('assets/images/green.jpg',),
-                SingleChildScrollView(
-                  //check if the logged in user has used institute email id
-                  //if they have not used institute email ID, show a "not allowed" dialog box
-                  //otherwise let everything work the way it should
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      // UserAccountsDrawerHeader(
-                      //   accountEmail: Text(widget.user.email),
-                      //   accountName: Text(widget.user.displayName),
-                      //   currentAccountPicture: CircleAvatar(
-                      //     backgroundImage: NetworkImage(widget.user.photoUrl),
-                      //   ),
-                      // ),
-                      Row(
+        : isAdmin(widget.user.email)
+            ? showAdminPage()
+            : LeaveScaffold(
+                title: "Home page",
+                body: Stack(
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.elliptical(150.0, 50.0),
+                        bottomRight: Radius.elliptical(150.0, 50.0),
+                      ),
+                      child: Image(
+                        width: double.infinity,
+                        fit: BoxFit.fill,
+                        image: AssetImage('assets/images/image.png'),
+                      ),
+                    ),
+                    // Image.asset('assets/images/green.jpg',),
+                    SingleChildScrollView(
+                      //check if the logged in user has used institute email id
+                      //if they have not used institute email ID, show a "not allowed" dialog box
+                      //otherwise let everything work the way it should
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: CircleAvatar(
-                              radius: 30,
-                              backgroundImage:
-                                  NetworkImage(widget.user.photoUrl),
-                            ),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          // UserAccountsDrawerHeader(
+                          //   accountEmail: Text(widget.user.email),
+                          //   accountName: Text(widget.user.displayName),
+                          //   currentAccountPicture: CircleAvatar(
+                          //     backgroundImage: NetworkImage(widget.user.photoUrl),
+                          //   ),
+                          // ),
+                          Row(
                             children: <Widget>[
-                              Text(
-                                widget.user.displayName,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17,
-                                    // fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.bold),
+                              Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage:
+                                      NetworkImage(widget.user.photoUrl),
+                                ),
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                widget.user.email,
-                                style: TextStyle(color: Colors.white),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    widget.user.displayName,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17,
+                                        // fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    widget.user.email,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15, right: 15),
+                            child: FadeTransition(
+                              // controller.forward(),
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: ListTile(
+                                  title: Text("Pending Approval"),
+                                  subtitle: Text(
+                                      "Check leaves which are pending approval"),
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                          return PendingApproval();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              opacity: animation1,
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 15.0, right: 15.0),
+                            child: FadeTransition(
+                              opacity: animation2,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: ListTile(
+                                  title: Text("Past Leaves"),
+                                  subtitle: Text("Check past leaves record"),
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                          return PastLeaves();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 15.0, right: 15.0),
+                            child: FadeTransition(
+                              opacity: animation3,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: ListTile(
+                                  title: Text("Check Remaining Leaves"),
+                                  subtitle: Text(
+                                      "Check leaves which are pending approval"),
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                          return RemainingLeaves();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15, right: 15),
-                        child: FadeTransition(
-                          // controller.forward(),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            child: ListTile(
-                              title: Text("Pending Approval"),
-                              subtitle: Text(
-                                  "Check leaves which are pending approval"),
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                      return PendingApproval();
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          opacity: animation1,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                        child: FadeTransition(
-                          opacity: animation2,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            child: ListTile(
-                              title: Text("Past Leaves"),
-                              subtitle: Text("Check past leaves record"),
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                      return PastLeaves();
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                        child: FadeTransition(
-                          opacity: animation3,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            child: ListTile(
-                              title: Text("Check Remaining Leaves"),
-                              subtitle: Text(
-                                  "Check leaves which are pending approval"),
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                      return RemainingLeaves();
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            floatingButton: FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return LeaveForm();
-                    },
-                  ),
-                );
-              },
-              child: Icon(Icons.add),
-            ),
-          );
+                floatingButton: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LeaveForm();
+                        },
+                      ),
+                    );
+                  },
+                  child: Icon(Icons.add),
+                ),
+              );
   }
 
   Widget notAllowedScreen() {
@@ -258,6 +262,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
         ),
       ),
+    );
+  }
+
+  bool isAdmin(String email) {
+    if (GlobalVariables.adminEmails.contains(email))
+      return true;
+    else
+      return false;
+  }
+
+  Widget showAdminPage() {
+    return AdminDashboard(
+      user: GlobalVariables.user,
     );
   }
 }
