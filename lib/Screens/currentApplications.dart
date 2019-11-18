@@ -16,6 +16,7 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
     @required String type,
     @required String photoUrl,
     @required DocumentSnapshot snapshot,
+    Color clr,
   }) {
     return Card(
       margin: EdgeInsets.all(10),
@@ -26,6 +27,7 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
       child: InkWell(
         child: SingleChildScrollView(
           child: Container(
+            color: clr,
             padding: const EdgeInsets.all(3),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -111,6 +113,34 @@ class _CurrentApplicationsState extends State<CurrentApplications> {
                       photoUrl: snapshot.data.documents[index].data["photoUrl"],
                       type: snapshot.data.documents[index].data["type"],
                       snapshot: snapshot.data.documents[index],
+                      clr: (snapshot.data.documents[index].data["type"] ==
+                              "Casual")
+                          ? Colors.blue[300]
+                          : (snapshot.data.documents[index].data["type"] ==
+                                  "Medical")
+                              ? Colors.red[300]
+                              : ((snapshot.data.documents[index].data["type"] ==
+                                      "ChildCare")
+                                  ? Colors.deepPurple[200]:
+                                  (snapshot.data.documents[index].data["type"] ==
+                              "Paid Leave")
+                          ? Colors.green[300]
+                          : (snapshot.data.documents[index].data["type"] ==
+                                  "Paternity")
+                              ? Colors.lightGreen[200]
+                              : ((snapshot.data.documents[index].data["type"] ==
+                                      "Vacation")
+                                  ? Colors.orange[200]:
+                                  (snapshot.data.documents[index].data["type"] ==
+                              "Lien")
+                          ? Colors.deepPurple[200]
+                          : (snapshot.data.documents[index].data["type"] ==
+                                  "Sabbatical")
+                              ? Colors.lightGreen[200]
+                              : (snapshot.data.documents[index].data["type"] ==
+                                      "Special")
+                                  ? Colors.orange[200]
+                                  : Colors.lightBlue[200])),
                     ),
                   );
                 },

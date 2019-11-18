@@ -19,15 +19,16 @@ class _PastLeavesState extends State<PastLeaves> {
     );
   }
 
-  Widget cardBuilder({
-    @required DocumentSnapshot snapshot,
-  }) {
+  Widget cardBuilder(
+      String subject, String type, String from, String to, bool status,
+      {Color clr}) {
+
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        color: HouseKeeping.randomColor(density: 100),
+        color: clr,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
@@ -35,21 +36,20 @@ class _PastLeavesState extends State<PastLeaves> {
             width: 450,
             child: ListTile(
               title: Text(
-                snapshot.data["subject"],
+                subject,
                 style: TextStyle(fontSize: 25),
               ),
-              subtitle: listDetail(snapshot.data["type"],
-                  snapshot.data["startDate"], snapshot.data["endDate"]),
+              subtitle: listDetail(type,from,to),
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return LeaveDetails(
-                        snapshot: snapshot,
-                      );
-                    },
-                  ),
-                );
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (BuildContext context) {
+                //       return LeaveDetails(
+                //         snapshot: snapshot,
+                //       );
+                //     },
+                //   ),
+                // );
               },
             ),
           ),
@@ -88,12 +88,39 @@ class _PastLeavesState extends State<PastLeaves> {
                 itemBuilder: (BuildContext context, index) {
                   return Card(
                     child: cardBuilder(
-                      snapshot: snapshot.data.documents[index],
-                      // snapshot.data.documents[index].data["subject"],
-                      // snapshot.data.documents[index].data["type"],
-                      // snapshot.data.documents[index].data["startDate"],
-                      // snapshot.data.documents[index].data["endDate"],
-                      // snapshot.data.documents[index].data["isGranted"],
+                      snapshot.data.documents[index].data["subject"],
+                      snapshot.data.documents[index].data["type"],
+                      snapshot.data.documents[index].data["startDate"],
+                      snapshot.data.documents[index].data["endDate"],
+                      snapshot.data.documents[index].data["isGranted"],
+                      clr: (snapshot.data.documents[index].data["type"] ==
+                              "Casual")
+                          ? Colors.blue[300]
+                          : (snapshot.data.documents[index].data["type"] ==
+                                  "Medical")
+                              ? Colors.red[300]
+                              : ((snapshot.data.documents[index].data["type"] ==
+                                      "ChildCare")
+                                  ? Colors.deepPurple[200]:
+                                  (snapshot.data.documents[index].data["type"] ==
+                              "Paid Leave")
+                          ? Colors.green[300]
+                          : (snapshot.data.documents[index].data["type"] ==
+                                  "Paternity")
+                              ? Colors.lightGreen[200]
+                              : ((snapshot.data.documents[index].data["type"] ==
+                                      "Vacation")
+                                  ? Colors.orange[200]:
+                                  (snapshot.data.documents[index].data["type"] ==
+                              "Lien")
+                          ? Colors.deepPurple[200]
+                          : (snapshot.data.documents[index].data["type"] ==
+                                  "Sabbatical")
+                              ? Colors.lightGreen[200]
+                              : (snapshot.data.documents[index].data["type"] ==
+                                      "Special")
+                                  ? Colors.orange[200]
+                                  : Colors.lightBlue[200])),
                     ),
                   );
                 },
