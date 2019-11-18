@@ -15,6 +15,23 @@ class GlobalVariables {
   static String name;
   static String timeStamp;
 
+  static const List<String> leavesList = <String>[
+    "Casual",
+    "ChildCare",
+    "Maternity",
+    "Medical",
+    "Paternity",
+    "HalfPaid",
+    "FullPaid",
+    "SpecialCasual",
+    "Vacation",
+    "ExtraOrdinary",
+    "LeaveNotDue",
+    "Lien",
+    "Sabbatical",
+    "Special"
+  ];
+
   static const String casualLeave = "Casual";
   static const String childCare = "ChildCare";
   static const String maternity = "Maternity";
