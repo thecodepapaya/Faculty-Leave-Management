@@ -10,4 +10,12 @@ class SpecialCasual extends CasualLeave {
   @override
   // TODO: implement remainingLeaves
   int get remainingLeaves => 15;
+
+  bool valid, academicPurpose = false;
+  void checkPurpose() {
+    if (academicPurpose)
+      valid = true;
+    else
+      valid = false;
+  }
 }
