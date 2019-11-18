@@ -20,7 +20,7 @@ class AdminDashboard extends StatefulWidget {
 
 class _AdminDashboardState extends State<AdminDashboard>
     with TickerProviderStateMixin {
-  AnimationController controller1, controller2, controller3;
+  AnimationController controller1, controller2;
   Animation animation1, animation2, animation3;
 
   @override
@@ -32,8 +32,6 @@ class _AdminDashboardState extends State<AdminDashboard>
         AnimationController(vsync: this, duration: Duration(seconds: 1));
     controller2 =
         AnimationController(vsync: this, duration: Duration(seconds: 1));
-    controller3 =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
     animation1 = Tween(
       begin: 0.0,
       end: 1.0,
@@ -41,19 +39,12 @@ class _AdminDashboardState extends State<AdminDashboard>
     animation2 = Tween(
       begin: 0.0,
       end: 1.0,
-    ).animate(controller1);
-    animation3 = Tween(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(controller1);
+    ).animate(controller2);
     Timer(Duration(milliseconds: 0), () {
       controller1.forward();
     });
     Timer(Duration(milliseconds: 300), () {
       controller2.forward();
-    });
-    Timer(Duration(milliseconds: 600), () {
-      controller3.forward();
     });
   }
 
@@ -61,7 +52,6 @@ class _AdminDashboardState extends State<AdminDashboard>
   void dispose() {
     controller1.dispose();
     controller2.dispose();
-    controller3.dispose();
     super.dispose();
   }
 
